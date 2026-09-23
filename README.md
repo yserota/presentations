@@ -1,6 +1,6 @@
 ﻿# Presentations
 
-Conference and internal presentations by Yvonne Serota, Group Manager Technical Writing, CyberArk.
+Conference and internal presentations by Yvonne Serota, Group Manager Technical Writing, Palo Alto Networks.
 
 Published at: https://pages.github.cyberng.com/yvonnes/presentations
 
