@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stale PRs Report — Sep 25, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0b0f1c; color: #e4e8f2; min-height: 100vh; padding: 40px 24px; }
+  .container { max-width: 980px; margin: 0 auto; }
+  .back { font-size: 12px; color: #72b9f5; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px; }
+  .back:hover { color: #9fd0fb; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #72b9f5; margin-bottom: 10px; }
+  h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #8997b0; margin-bottom: 32px; }
+
+  /* Summary stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+  .stat { background: #10172a; border: 1px solid rgba(77,157,224,0.2); border-radius: 10px; padding: 16px 20px; }
+  .stat-value { font-size: 26px; font-weight: 800; color: #fff; }
+  .stat-value.danger { color: #f87171; }
+  .stat-value.warn { color: #fbbf24; }
+  .stat-label { font-size: 11px; color: #8997b0; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Alert banner */
+  .alert { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.35); border-radius: 10px; padding: 14px 20px; margin-bottom: 28px; }
+  .alert-title { font-size: 13px; font-weight: 700; color: #f87171; margin-bottom: 4px; }
+  .alert-body { font-size: 13px; color: #ccc; line-height: 1.5; }
+
+  /* Manager sections */
+  .section { margin-bottom: 36px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  h2 { font-size: 17px; font-weight: 700; color: #fff; }
+  .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 999px; border: 1px solid; }
+  .tag-blue { background: rgba(77,157,224,0.1); color: #72b9f5; border-color: rgba(77,157,224,0.25); }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; background: #10172a; border: 1px solid rgba(77,157,224,0.15); border-radius: 10px; overflow: hidden; font-size: 12.5px; }
+  thead tr { background: rgba(77,157,224,0.06); }
+  th { padding: 10px 14px; text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #8997b0; border-bottom: 1px solid rgba(77,157,224,0.15); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(77,157,224,0.04); }
+  .mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11.5px; color: #93c5fd; }
+  .age { font-weight: 700; }
+  .age-critical { color: #f87171; }
+  .age-warn { color: #fbbf24; }
+  .age-ok { color: #8997b0; }
+
+  /* Action badges */
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+  .badge-urgent   { background: rgba(248,113,113,0.12); color: #f87171;  border-color: rgba(248,113,113,0.35); }
+  .badge-merge    { background: rgba(251,191,36,0.1);  color: #fbbf24;  border-color: rgba(251,191,36,0.3); }
+  .badge-approval { background: rgba(251,191,36,0.1);  color: #fbbf24;  border-color: rgba(251,191,36,0.3); }
+  .badge-monitor  { background: rgba(148,163,184,0.08); color: #94a3b8; border-color: rgba(148,163,184,0.2); }
+  .badge-noticket { background: rgba(148,163,184,0.08); color: #94a3b8; border-color: rgba(148,163,184,0.2); }
+
+  /* Legend */
+  .legend { background: #10172a; border: 1px solid rgba(77,157,224,0.15); border-radius: 10px; padding: 20px 24px; margin-top: 32px; }
+  .legend h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #8997b0; margin-bottom: 14px; }
+  .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .legend-row { display: flex; align-items: flex-start; gap: 10px; }
+  .legend-desc { font-size: 12px; color: #8997b0; line-height: 1.4; }
+
+  .footer { margin-top: 32px; font-size: 11px; color: #475569; text-align: center; }
+  @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } .legend-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../" class="back">← Back to presentations</a>
+
+  <div class="eyebrow">Documentation Operations · Sep 25, 2026</div>
+  <h1>Stale Open PRs — tdocs</h1>
+  <p class="subtitle">Open pull requests older than 30 days across all tdocs repos. Please review your team's items and take action where indicated. Bot PRs and test repos excluded.</p>
+
+  <!-- Summary stats -->
+  <div class="stats">
+    <div class="stat"><div class="stat-value">17</div><div class="stat-label">Total stale PRs</div></div>
+    <div class="stat"><div class="stat-value danger">1</div><div class="stat-label">Blocked — act now</div></div>
+    <div class="stat"><div class="stat-value warn">4</div><div class="stat-label">Ready to merge/close</div></div>
+    <div class="stat"><div class="stat-value warn">2</div><div class="stat-label">Awaiting approval</div></div>
+  </div>
+
+  <!-- Alert -->
+  <div class="alert">
+    <div class="alert-title">Action required — Blocked ticket</div>
+    <div class="alert-body"><strong>DOC-23910</strong> (Megha Magaji — conjur-ent#992) has been open 57 days and the Jira ticket is marked <strong>Blocked</strong>. Please follow up to identify what is preventing progress.</div>
+  </div>
+
+  <!-- Adam Christensen -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Adam Christensen</h2>
+      <span class="tag tag-blue">Pod 1</span>
+      <span class="tag tag-blue">9 PRs</span>
+    </div>
+    <table>
+      <thead><tr><th>PR</th><th>Age</th><th>Writer</th><th>Jira</th><th>Ticket Status</th><th>Summary</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">conjur-ent#992</td><td class="age age-critical">57d</td><td>Megha Magaji</td><td class="mono">DOC-23910</td><td>Blocked</td><td>CASOS-to-PVWA migration guide</td><td><span class="badge badge-urgent">Blocked — act now</span></td></tr>
+        <tr><td class="mono">docs#3969</td><td class="age age-critical">57d</td><td>Matt Thies</td><td class="mono">DOC-23984</td><td>Under Review</td><td>Multi-Step Access Reviews docs (XL)</td><td><span class="badge badge-monitor">Under review</span></td></tr>
+        <tr><td class="mono">docs#4043</td><td class="age age-warn">44d</td><td>Matt Thies</td><td class="mono">DOC-22537</td><td>Under Review</td><td>Auto-revoke access when campaign ends</td><td><span class="badge badge-monitor">Under review</span></td></tr>
+        <tr><td class="mono">agent-skills#33</td><td class="age age-warn">47d</td><td>Steve Goodman</td><td class="mono">DOC-23836</td><td>Done ✓</td><td>macOS Agent 26.8 Proxy CLI Support</td><td><span class="badge badge-merge">Merge or close</span></td></tr>
+        <tr><td class="mono">EPM#1146</td><td class="age age-warn">44d</td><td>Steve Goodman</td><td class="mono">DOC-24222</td><td>Approved ✓</td><td>Policy catalog ARR improved onboarding</td><td><span class="badge badge-merge">Merge or close</span></td></tr>
+        <tr><td class="mono">EPM#1147</td><td class="age age-warn">44d</td><td>Steve Goodman</td><td class="mono">DOC-23048</td><td>Under Review</td><td>Update links to Identity admin</td><td><span class="badge badge-monitor">Under review</span></td></tr>
+        <tr><td class="mono">EPM#1162</td><td class="age age-ok">36d</td><td>Steve Goodman</td><td class="mono">DOC-23515</td><td>Under Review</td><td>Remove duplicate endpoints (EPM)</td><td><span class="badge badge-monitor">Under review</span></td></tr>
+        <tr><td class="mono">PAS#2472</td><td class="age age-ok">36d</td><td>Steve Goodman</td><td class="mono">DOC-23178</td><td>In Progress</td><td>Windows local WMI plugin</td><td><span class="badge badge-monitor">Under review</span></td></tr>
+        <tr><td class="mono">agent-skills#32</td><td class="age age-warn">52d</td><td>Steve Goodman</td><td>—</td><td>No ticket</td><td>Add powershell-git-prompt skill</td><td><span class="badge badge-noticket">No Jira ticket</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Danielle Biber -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Danielle Biber</h2>
+      <span class="tag tag-blue">Pod 2</span>
+      <span class="tag tag-blue">4 PRs</span>
+    </div>
+    <table>
+      <thead><tr><th>PR</th><th>Age</th><th>Writer</th><th>Jira</th><th>Ticket Status</th><th>Summary</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">docs#3982</td><td class="age age-critical">53d</td><td>Kate Reuveny</td><td class="mono">DOC-22182</td><td>Approved ✓</td><td>DisCo: Update sources for secrets &amp; workloads</td><td><span class="badge badge-merge">Merge or close</span></td></tr>
+        <tr><td class="mono">PAS#2459</td><td class="age age-warn">44d</td><td>Elisha Khera</td><td class="mono">DOC-22657</td><td>Done ✓</td><td>Update HTML5GW Docs</td><td><span class="badge badge-merge">Merge or close</span></td></tr>
+        <tr><td class="mono">conjur-ent#1006</td><td class="age age-ok">37d</td><td>Mark Lawrence</td><td class="mono">DOC-24240</td><td>Awaiting Approval</td><td>Outcomes-based IA for Conjur Cloud SaaS</td><td><span class="badge badge-approval">Awaiting approval</span></td></tr>
+        <tr><td class="mono">conjur-ent#1007</td><td class="age age-ok">36d</td><td>Mark Lawrence</td><td class="mono">DOC-24030</td><td>Awaiting Approval</td><td>SaaS RTO/RPO guidelines</td><td><span class="badge badge-approval">Awaiting approval</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Vita Gilin -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Vita Gilin</h2>
+      <span class="tag tag-blue">SOH</span>
+      <span class="tag tag-blue">4 PRs</span>
+    </div>
+    <table>
+      <thead><tr><th>PR</th><th>Age</th><th>Writer</th><th>Jira</th><th>Ticket Status</th><th>Summary</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">mkdocs-training#138</td><td class="age age-critical">57d</td><td>Vita Gilin</td><td>—</td><td>No ticket</td><td>Update MkDocs config (TOC, navigation)</td><td><span class="badge badge-noticket">No Jira ticket</span></td></tr>
+        <tr><td class="mono">docs#3996</td><td class="age age-warn">52d</td><td>Vita Gilin</td><td>—</td><td>No ticket</td><td>Split SIA connector posts</td><td><span class="badge badge-noticket">No Jira ticket</span></td></tr>
+        <tr><td class="mono">docs#4061</td><td class="age age-warn">40d</td><td>Rivka Teller</td><td>—</td><td>No ticket</td><td>Third party notice in MkDocs (POC)</td><td><span class="badge badge-noticket">No Jira ticket</span></td></tr>
+        <tr><td class="mono">docs#4060</td><td class="age age-warn">40d</td><td>Rivka Teller</td><td>—</td><td>No ticket</td><td>Portal page in MkDocs (POC)</td><td><span class="badge badge-noticket">No Jira ticket</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <h3>Action key</h3>
+    <div class="legend-grid">
+      <div class="legend-row"><span class="badge badge-urgent">Blocked — act now</span><span class="legend-desc">Ticket is blocked — find out what is preventing progress</span></div>
+      <div class="legend-row"><span class="badge badge-merge">Merge or close</span><span class="legend-desc">Jira ticket is Done/Approved — PR should be merged or closed</span></div>
+      <div class="legend-row"><span class="badge badge-approval">Awaiting approval</span><span class="legend-desc">PR is ready but waiting on a reviewer — nudge them</span></div>
+      <div class="legend-row"><span class="badge badge-monitor">Under review</span><span class="legend-desc">Ticket is active — no action needed, tracking only</span></div>
+      <div class="legend-row"><span class="badge badge-noticket">No Jira ticket</span><span class="legend-desc">No linked ticket — confirm scope and create one if needed</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Generated Sep 25, 2026 · GitHub tdocs org (open PRs &gt; 30 days) + Jira DOC project · Bot PRs and test repos excluded</div>
+
+</div>
+</body>
+</html>
