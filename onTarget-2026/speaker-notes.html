@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaker Notes — From AI to Everyday Practice · onTarget 2026</title>
+<style>
+  :root {
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --text: #111827;
+    --text-dim: #4b5563;
+    --border: #e5e7eb;
+    --bg-note: #f9fafb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px; line-height: 1.65; color: var(--text);
+    background: #fff; padding: 0;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    padding: 48px 56px 36px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .cover-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  .cover-title { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
+  .cover-meta { font-size: 13px; color: var(--text-dim); display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+  .cover-meta span { display: flex; align-items: center; gap: 5px; }
+
+  /* ── Timing bar ── */
+  .timing-bar {
+    display: flex; flex-wrap: wrap; gap: 0;
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; margin: 28px 56px;
+    font-size: 11px;
+  }
+  .timing-cell {
+    flex: 1; min-width: 0;
+    padding: 7px 10px; border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .timing-cell:last-child { border-right: none; }
+  .timing-cell .t-slide { font-weight: 700; color: var(--accent); }
+  .timing-cell .t-min { color: var(--text-dim); margin-top: 1px; }
+
+  /* ── Slide block ── */
+  .slide-block {
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--border);
+    page-break-inside: avoid;
+  }
+  .slide-block:last-child { border-bottom: none; }
+
+  .slide-header {
+    display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;
+  }
+  .slide-num {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    background: var(--accent-light); padding: 3px 10px;
+    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+  }
+  .slide-section {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-dim);
+  }
+  .slide-title-text {
+    font-size: 18px; font-weight: 800; color: var(--text);
+    line-height: 1.25; margin-bottom: 6px;
+  }
+  .timing-tag {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    color: var(--accent); background: var(--accent-light);
+    border-radius: 4px; padding: 2px 8px; margin-bottom: 12px;
+  }
+  .notes-text {
+    font-size: 15px; line-height: 1.75; color: #1f2937;
+    background: var(--bg-note); border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 16px 20px;
+  }
+  .notes-text strong { color: var(--text); }
+
+  /* ── Print ── */
+  @media print {
+    body { font-size: 12pt; }
+    .cover { padding: 32px 40px 24px; }
+    .cover-title { font-size: 20pt; }
+    .slide-block { padding: 20px 40px; }
+    .timing-bar { margin: 20px 40px; }
+    .notes-text { font-size: 11pt; line-height: 1.6; }
+    .slide-title-text { font-size: 14pt; }
+    @page { margin: 1.5cm 2cm; }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    .cover, .slide-block { padding-left: 20px; padding-right: 20px; }
+    .timing-bar { margin-left: 20px; margin-right: 20px; }
+    .cover-meta { flex-direction: column; gap: 8px; }
+    .timing-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-tag">📋 Speaker Notes · onTarget 2026</div>
+  <div class="cover-title">From AI to Everyday Practice:<br>Operationalizing AI in Technical Writing</div>
+  <div class="cover-meta">
+    <span>🎤 <strong>Yvonne Serota</strong> · Group Manager, Technical Writing · Palo Alto Networks</span>
+    <span>📅 October 15, 2026</span>
+    <span>⏱ ~30 min · 17 slides</span>
+  </div>
+</div>
+
+<!-- Timing overview -->
+<div class="timing-bar">
+  <div class="timing-cell"><div class="t-slide">1</div><div class="t-min">1 min</div></div>
+  <div class="timing-cell"><div class="t-slide">2</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">3</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">4</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">5</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">6</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">7</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">8</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">9</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">10</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">11</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">12</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">13</div><div class="t-min">1.5</div></div>
+  <div class="timing-cell"><div class="t-slide">14</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">15</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">16</div><div class="t-min">2</div></div>
+  <div class="timing-cell"><div class="t-slide">17</div><div class="t-min">1</div></div>
+</div>
+
+<!-- Slide 1 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 1</span>
+    <span class="slide-section">Title</span>
+  </div>
+  <div class="slide-title-text">From AI to Everyday Practice: Operationalizing AI in Technical Writing</div>
+  <div class="timing-tag">⏱ ~1 min</div>
+  <div class="notes-text">
+    Good [morning/afternoon], everyone. I'm Yvonne Serota — I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry.<br><br>
+    <strong>What I'm sharing today isn't a vision — it's what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.
+  </div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 2</span>
+    <span class="slide-section">Context</span>
+  </div>
+  <div class="slide-title-text">The Palo Alto Networks TW Team</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    Let me set the scene. 20+ writers, two major repos, dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content.<br><br>
+    Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.
+  </div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 3</span>
+    <span class="slide-section">Our Organization</span>
+  </div>
+  <div class="slide-title-text">Two Pillars: SOH &amp; Writing Pods</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    So how did we structure ourselves to solve this? We split into two pillars. The Standards &amp; Operations Hub owns tooling, infrastructure, and AI platform — led by Vita Gilin. Delivery Writing Pods are the execution layer.<br><br>
+    <strong>The critical insight</strong>: you can't build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential — and not obvious to us at first.
+  </div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 4</span>
+    <span class="slide-section">The Problem</span>
+  </div>
+  <div class="slide-title-text">The Documentation Pain Points</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one.<br><br>
+    <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&amp;D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.
+  </div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 5</span>
+    <span class="slide-section">The Approach</span>
+  </div>
+  <div class="slide-title-text">Not Copilot. Agentic.</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    The temptation was to give writers a ChatGPT window and call it done. That's what most teams did. The distinction that drove everything: <strong>a prompt is one-shot, lives in a chat window, dies there</strong>. A skill is versioned, team-shared, and works the same way every time.<br><br>
+    The core insight on the right — "AI doesn't help if it doesn't understand your workflow, your tools, your data" — is the north star we kept returning to whenever we debated priorities.
+  </div>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 6</span>
+    <span class="slide-section">The Platform</span>
+  </div>
+  <div class="slide-title-text">Why We Chose Cursor as Our AI IDE</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP — the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run.<br><br>
+    <strong>The Flare → MkDocs migration was the infrastructure prerequisite</strong> — Markdown is agent-readable. We couldn't have built any of this on binary Flare files.
+  </div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 7</span>
+    <span class="slide-section">The Skills</span>
+  </div>
+  <div class="slide-title-text">The Skills Library We Built</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    Let me walk through the library. The biggest change since we last shared any of this: Ben Skelker refactored TW Feature Doc into two specialized skills — <strong>TW Doc Write</strong> for creating and updating docs from source material, and <strong>TW Doc Review</strong> for assessing existing pages in a fresh session. The split matters: a reviewer that knows why every sentence is there is the wrong reviewer.<br><br>
+    Open PR handles the editorial pass and PR creation. DCI Pipeline is our team health measurement system. Day Manager synthesizes my email, calendar, and Jira every morning. Two in development: automated PR review and UI path validation.<br><br>
+    <strong>The design principle across all of them</strong>: each skill knows exactly where to find context, what to do with it, how to validate the output, and when to hand off to a human. That's the difference between a skill and a prompt.
+  </div>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 8</span>
+    <span class="slide-section">The Lifecycle</span>
+  </div>
+  <div class="slide-title-text">AI Embedded in Every Phase</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>.<br><br>
+    <strong>TW Doc Write</strong> covers Discovery + Authoring — phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices.<br><br>
+    Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters.
+  </div>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 9</span>
+    <span class="slide-section">Deep Dive</span>
+  </div>
+  <div class="slide-title-text">Write, Refine, Review: Three Roles, Two Skills</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    Let me show you the two-skill workflow in detail. <strong>TW Doc Write</strong>: writer types one command, agent gathers all context via MCP, pins the style guide, writes the complete Markdown draft. Writer reviews and refines.<br><br>
+    Then — and this is new — the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness.<br><br>
+    <strong>Discovery + draft: under 30 minutes. Quality review: minutes, not a review cycle.</strong>
+  </div>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 10</span>
+    <span class="slide-section">Broader Impact</span>
+  </div>
+  <div class="slide-title-text">AI Across the Whole TW Operation</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command.<br><br>
+    The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.
+  </div>
+</div>
+
+<!-- Slide 11 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 11</span>
+    <span class="slide-section">Content Quality</span>
+  </div>
+  <div class="slide-title-text">The Documentation Health Initiative</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50.<br><br>
+    The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.
+  </div>
+</div>
+
+<!-- Slide 12 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 12</span>
+    <span class="slide-section">Day in the Life</span>
+  </div>
+  <div class="slide-title-text">A Day in the Life: Before &amp; After</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week.<br><br>
+    Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>
+  </div>
+</div>
+
+<!-- Slide 13 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 13</span>
+    <span class="slide-section">Impact</span>
+  </div>
+  <div class="slide-title-text">The Numbers</div>
+  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="notes-text">
+    Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>10 skills in the library, 8 live</strong> — that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80–0.95 is the sustainability zone.<br><br>
+    The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.
+  </div>
+</div>
+
+<!-- Slide 14 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 14</span>
+    <span class="slide-section">Role Evolution</span>
+  </div>
+  <div class="slide-title-text">From Technical Writer to Content Architect</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    <strong>This is the most important slide. The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow.<br><br>
+    The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.
+  </div>
+</div>
+
+<!-- Slide 15 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 15</span>
+    <span class="slide-section">What We Learned</span>
+  </div>
+  <div class="slide-title-text">Lessons Learned</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    Six real lessons from 18 months.<br><br>
+    <strong>Infrastructure first</strong> — the Flare migration was painful and essential.<br>
+    <strong>Start with one skill</strong> and make it excellent before expanding.<br>
+    <strong>Connect your tools first</strong> — without MCP, the agent is blind.<br>
+    <strong>Keep the human in the loop</strong> deliberately — the feedback loop is how skills improve over time.<br>
+    <strong>Measure before you optimize</strong> — we didn't know our cycle time was 12 days until we measured it.<br>
+    And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don't.
+  </div>
+</div>
+
+<!-- Slide 16 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 16</span>
+    <span class="slide-section">For You</span>
+  </div>
+  <div class="slide-title-text">What You Can Take Home Today</div>
+  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="notes-text">
+    Five things to take home. [Walk through each.]<br><br>
+    <strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake: building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can't.<br><br>
+    <strong>MCP connectivity is the prerequisite, not the afterthought.</strong>
+  </div>
+</div>
+
+<!-- Slide 17 -->
+<div class="slide-block">
+  <div class="slide-header">
+    <span class="slide-num">Slide 17</span>
+    <span class="slide-section">Thank You</span>
+  </div>
+  <div class="slide-title-text">Thank You</div>
+  <div class="timing-tag">⏱ ~1 min</div>
+  <div class="notes-text">
+    Thank you. Happy to go deeper on any of this — the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership.<br><br>
+    Come find me, or reach out via the Skills library repo — it's linked on screen. [Open for questions]
+  </div>
+</div>
+
+</body>
+</html>
