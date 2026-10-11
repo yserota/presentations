@@ -551,11 +551,19 @@
     <div class="grid-3" style="flex:1;align-content:start">
       <div class="skill-card" style="border-color:rgba(60,185,124,0.3)">
         <div style="display:flex;justify-content:space-between;align-items:center">
-          <div class="skill-name">TW Feature Doc</div>
+          <div class="skill-name">TW Doc Write</div>
           <span class="badge badge-live"><span class="dot"></span>Live</span>
         </div>
-        <div class="skill-desc">The core authoring agent. Give it a Jira ticket, and it pulls the PRD, HLD, Figma screens, and code context &mdash; then drafts the full documentation. No SME interview needed.</div>
+        <div class="skill-desc">Creates or updates a doc page from source material — Jira, Confluence HLDs, Figma screens, product code, images, PDFs. Pins the style guide before writing a single line and reports every inference.</div>
         <div class="skill-phase">Discovery &rarr; Authoring</div>
+      </div>
+      <div class="skill-card" style="border-color:rgba(60,185,124,0.3)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="skill-name">TW Doc Review</div>
+          <span class="badge badge-live"><span class="dot"></span>Live</span>
+        </div>
+        <div class="skill-desc">Assesses an existing doc page — style guide conformance, technical accuracy, source coverage, completeness. Designed to run in a fresh session so the reviewer didn't write the draft.</div>
+        <div class="skill-phase">Review &rarr; Quality</div>
       </div>
       <div class="skill-card" style="border-color:rgba(60,185,124,0.3)">
         <div style="display:flex;justify-content:space-between;align-items:center">
@@ -656,7 +664,7 @@
       </div>
       <div class="phase-col">
         <div class="phase-header">III &mdash; Discovery</div>
-        <div class="phase-agent">TW Feature Doc</div>
+        <div class="phase-agent">TW Doc Write</div>
         <div class="phase-label">Autonomously pulls Confluence HLDs, Figma screens, Jira context, and GitHub branches &mdash; generating a full understanding of the feature before writing begins</div>
         <div class="phase-human" style="margin-top:8px">Human: review inputs</div>
         <div class="phase-label">Writer validates context quality before authoring proceeds</div>
@@ -666,7 +674,7 @@
       </div>
       <div class="phase-col">
         <div class="phase-header">IV &mdash; Authoring</div>
-        <div class="phase-agent">TW Feature Doc</div>
+        <div class="phase-agent">TW Doc Write</div>
         <div class="phase-label">Generates the complete Markdown draft from the discovered context. Writer edits and refines the output</div>
         <div class="phase-agent" style="margin-top:8px">TW Quick Doc</div>
         <div class="phase-label">Handles minor edits and targeted fixes within a 600-character budget</div>
@@ -676,12 +684,15 @@
       </div>
       <div class="phase-col">
         <div class="phase-header">V &mdash; Validation</div>
-        <div class="phase-agent">Automated PR Reviewer</div>
+        <div class="phase-agent">TW Doc Review</div>
+        <div class="phase-label">Writer-invoked review: style guide conformance, technical accuracy, source coverage &mdash; in a fresh session so the reviewer didn't write the draft</div>
+        <div class="phase-agent" style="margin-top:8px">Automated PR Reviewer</div>
         <div class="phase-label">Style guide checks, link validation, and technical accuracy review before any human sees it</div>
         <div class="phase-agent" style="margin-top:8px">Sanity Check Agent</div>
         <div class="phase-label">Compares draft completeness vs. original PRD requirements. Flags gaps before PR creation</div>
         <div style="margin-top:auto;padding-top:8px">
-          <span class="badge badge-indev"><span class="dot"></span>Q1 FY27</span>
+          <span class="badge badge-live" style="margin-right:4px"><span class="dot"></span>Review Live</span>
+          <span class="badge badge-indev"><span class="dot"></span>Auto Q1 FY27</span>
         </div>
       </div>
       <div class="phase-col">
@@ -703,67 +714,90 @@
   <!-- ════════════════════════════════════════ -->
   <div class="slide" id="s9">
     <div class="section-label">Deep Dive</div>
-    <div class="eyebrow">TW Feature Doc &mdash; How It Actually Works</div>
-    <div class="slide-title">From Jira Ticket to Draft Doc in One Command</div>
+    <div class="eyebrow">TW Doc Write + TW Doc Review &mdash; How They Work Together</div>
+    <div class="slide-title">Write, Refine, Review: Three Roles, Two Skills</div>
     <div class="divider"></div>
     <div class="grid-2" style="flex:1;gap:20px">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="font-size:12px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px">What the writer does</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:2px">TW Doc Write &mdash; Authoring phase</div>
         <div class="step-row">
           <div class="step-num">1</div>
           <div>
             <div class="step-who human">Writer</div>
-            <div class="step-desc">Opens Cursor, types <code style="background:var(--bg-card2);padding:1px 5px;border-radius:3px">/tw-feature-doc</code> with the Jira ticket ID. That's it.</div>
+            <div class="step-desc">Types <code style="background:var(--bg-card2);padding:1px 5px;border-radius:3px">/tw-doc-write</code> with the Jira ticket ID. One command.</div>
           </div>
         </div>
         <div class="step-row">
           <div class="step-num">2</div>
           <div>
             <div class="step-who agent">Agent: Context Gathering</div>
-            <div class="step-desc">Pulls Jira ticket details, linked Confluence HLDs, attached Figma designs, and referenced GitHub branches automatically via MCP connections.</div>
+            <div class="step-desc">Pulls Jira details, Confluence HLDs, Figma designs, and GitHub branches automatically via MCP. No manual context hunting.</div>
           </div>
         </div>
         <div class="step-row">
           <div class="step-num">3</div>
           <div>
-            <div class="step-who agent">Agent: Style + Structure</div>
-            <div class="step-desc">Reads the Palo Alto Networks style guide, identifies the correct doc type and template, maps the content architecture, and applies heading/tone conventions.</div>
+            <div class="step-who agent">Agent: Pin Style Guide</div>
+            <div class="step-desc">Reads the pinned CyberArk style guide and picks the correct template for this doc type before writing a single line.</div>
           </div>
         </div>
         <div class="step-row">
           <div class="step-num">4</div>
           <div>
             <div class="step-who agent">Agent: Draft Generation</div>
-            <div class="step-desc">Writes the complete Markdown doc: overview, prerequisites, procedures, and troubleshooting sections. Embeds correct YAML frontmatter for agent-readiness.</div>
+            <div class="step-desc">Writes the complete Markdown doc with correct headings, procedures, and YAML frontmatter. Reports every inferred statement.</div>
           </div>
         </div>
         <div class="step-row">
           <div class="step-num">5</div>
           <div>
             <div class="step-who human">Writer: Review &amp; Refine</div>
-            <div class="step-desc">Writer reviews the draft, focuses on information architecture decisions, accuracy edge cases, and quality of user experience &mdash; not drafting from scratch.</div>
+            <div class="step-desc">Reviews the draft, focuses on information architecture and accuracy. Refines before the quality review.</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--border-dim);padding-top:8px;margin-top:2px">
+          <div style="font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px">TW Doc Review &mdash; Quality phase</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">6</div>
+          <div>
+            <div class="step-who human">Writer: Fresh Session</div>
+            <div class="step-desc">Invokes <code style="background:var(--bg-card2);padding:1px 5px;border-radius:3px">/tw-doc-review</code> in a new session — so the reviewer didn't write the draft.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">7</div>
+          <div>
+            <div class="step-who agent">Agent: Quality Check</div>
+            <div class="step-desc">Checks style guide conformance, technical accuracy, source coverage, and completeness. Flags gaps the author couldn't see.</div>
           </div>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="card" style="border-color:rgba(60,185,124,0.3)">
-          <h3>Inputs the skill pulls automatically</h3>
+          <h3>What TW Doc Write pulls automatically</h3>
           <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:6px">
             <span class="tool-chip"><span class="tc-dot"></span>Jira ticket (scope)</span>
             <span class="tool-chip"><span class="tc-dot"></span>Confluence HLD (how it works)</span>
             <span class="tool-chip"><span class="tc-dot"></span>Figma screens (UI)</span>
             <span class="tool-chip"><span class="tc-dot"></span>GitHub branch (implementation)</span>
-            <span class="tool-chip"><span class="tc-dot"></span>Style guide (conventions)</span>
+            <span class="tool-chip"><span class="tc-dot"></span>Pinned style guide</span>
             <span class="tool-chip"><span class="tc-dot"></span>Existing docs (context)</span>
           </div>
         </div>
         <div class="card">
-          <h3>What comes out</h3>
-          <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">A complete Markdown file with correct headings, procedures, and YAML frontmatter. Ready for writer review &mdash; not a starting outline, a working draft that addresses all the requirements in the Jira ticket.</p>
+          <h3>What TW Doc Review checks</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:6px">
+            <span class="tool-chip"><span class="tc-dot"></span>Style guide conformance</span>
+            <span class="tool-chip"><span class="tc-dot"></span>Technical accuracy</span>
+            <span class="tool-chip"><span class="tc-dot"></span>Source coverage</span>
+            <span class="tool-chip"><span class="tc-dot"></span>Completeness gaps</span>
+            <span class="tool-chip"><span class="tc-dot"></span>Template conformance</span>
+          </div>
         </div>
         <div class="card" style="background:rgba(60,185,124,0.05);border-color:rgba(60,185,124,0.3)">
-          <h3 style="color:var(--green)">The impact</h3>
-          <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">Discovery + first draft: from 2&ndash;3 days of manual work to under 30 minutes. Writer time shifts from drafting to reviewing, improving information architecture, and surfacing gaps the agent couldn't see.</p>
+          <h3 style="color:var(--green)">Why the split matters</h3>
+          <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">A reviewer that knows why every sentence is there is the wrong reviewer. TW Doc Review runs in a fresh session — no memory of the authoring choices. It catches what the author rationalized away. Discovery + draft: <strong style="color:#fff">under 30 min</strong>. Quality review: <strong style="color:#fff">minutes, not a review cycle</strong>.</p>
         </div>
       </div>
     </div>
@@ -852,7 +886,7 @@
           <div class="day-block" style="border-color:rgba(60,185,124,0.2)">
             <div class="day-time">Late Morning</div>
             <div class="day-activity">TW Feature Doc runs</div>
-            <div class="day-detail">Type <code style="font-size:10px;background:rgba(0,0,0,0.3);padding:1px 4px;border-radius:3px">/tw-feature-doc DOC-2456</code>. Agent gathers all context and generates a complete draft.</div>
+            <div class="day-detail">Type <code style="font-size:10px;background:rgba(0,0,0,0.3);padding:1px 4px;border-radius:3px">/tw-doc-write DOC-2456</code>. Agent gathers all context and generates a complete draft.</div>
             <span class="day-ai">🤖 Agent</span>
           </div>
           <div class="day-block" style="border-color:rgba(60,185,124,0.2)">
@@ -889,8 +923,8 @@
         <div class="stat-label">Cycle time reduction<br><span style="color:var(--text-dimmer)">target by Q3 FY27</span></div>
       </div>
       <div class="stat-item">
-        <div class="stat-value">9</div>
-        <div class="stat-label">Skills in the library<br><span style="color:var(--text-dimmer)">7 live, 2 in dev</span></div>
+        <div class="stat-value">10</div>
+        <div class="stat-label">Skills in the library<br><span style="color:var(--text-dimmer)">8 live, 2 in dev</span></div>
       </div>
       <div class="stat-item">
         <div class="stat-value accent">0.80&ndash;0.95</div>
@@ -1244,13 +1278,13 @@
     4: `<em>~1.5 min · The Problem</em><br>Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one. <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.`,
     5: `<em>~1.5 min · Approach</em><br>The temptation was to give writers a ChatGPT window and call it done. That's what most teams did. The distinction that drove everything: <strong>a prompt is one-shot, lives in a chat window, dies there</strong>. A skill is versioned, team-shared, and works the same way every time. The core insight on the right — "AI doesn't help if it doesn't understand your workflow, your tools, your data" — is the north star we kept returning to whenever we debated priorities.`,
     6: `<em>~2 min · Platform</em><br>We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP — the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run. <strong>The Flare → MkDocs migration was the infrastructure prerequisite</strong> — Markdown is agent-readable. We couldn't have built any of this on binary Flare files.`,
-    7: `<em>~2 min · Skills</em><br>Let me walk through the library. TW Feature Doc is the core — give it a Jira ticket, get a full draft. Open PR handles the editorial pass and PR creation. DCI Pipeline is our team health measurement system. Day Manager synthesizes my email, calendar, and Jira every morning. Two in development: automated PR review and UI path validation. <strong>The design principle</strong>: each skill knows exactly where to look for context, what to do with it, how to validate the output, and when to hand off to a human. That's the difference between a skill and a prompt.`,
-    8: `<em>~1.5 min · ADLC</em><br>The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>. Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters. The agent surfaces everything; the writer decides.`,
-    9: `<em>~2 min · Deep Dive</em><br>Let me show you TW Feature Doc in detail, because the steps are instructive. Step 1: writer types one command with the Jira ticket ID. Steps 2–4 are fully agent-driven: context gathering from every connected tool, reading the style guide, generating the complete Markdown draft. Step 5: writer reviews. That's it. <strong>Discovery + first draft: from 2–3 days to under 30 minutes</strong>. Not because the AI is magic — because MCP gives it all the context automatically. The writer's time shifts to judgment, not production.`,
+    7: `<em>~2 min · Skills</em><br>Let me walk through the library. The biggest change since we last shared any of this: Ben Skelker refactored TW Feature Doc into two specialized skills — <strong>TW Doc Write</strong> for creating and updating docs from source material, and <strong>TW Doc Review</strong> for assessing existing pages in a fresh session. The split matters: a reviewer that knows why every sentence is there is the wrong reviewer. [Continue with other skills...] The design principle across all of them: each skill knows exactly where to find context, what to do with it, how to validate the output, and when to hand off to a human.`,
+    8: `<em>~1.5 min · ADLC</em><br>The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>. <strong>TW Doc Write</strong> covers Discovery + Authoring — phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices. Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters.`,
+    9: `<em>~2 min · Deep Dive</em><br>Let me show you the two-skill workflow in detail. <strong>TW Doc Write</strong>: writer types one command, agent gathers all context via MCP, pins the style guide, writes the complete Markdown draft. Writer reviews and refines. Then — and this is new — the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness. <strong>Discovery + draft: under 30 minutes. Quality review: minutes, not a review cycle.</strong>`,
     10: `<em>~1.5 min · Broader Impact</em><br>Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command. The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.`,
     11: `<em>~1.5 min · Doc Health</em><br>Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50. The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.`,
     12: `<em>~1.5 min · Day in the Life</em><br>I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week. Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>`,
-    13: `<em>~1.5 min · Numbers</em><br>Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>7 skills live, 2 in dev</strong>. DCI target range 0.80–0.95 is the sustainability zone: enough demand to keep the team engaged, not so much that we're constantly overloaded. The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.`,
+    13: `<em>~1.5 min · Numbers</em><br>Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>10 skills in the library, 8 live</strong> — that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80–0.95 is the sustainability zone: enough demand to keep the team engaged, not so much that we're constantly overloaded. The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.`,
     14: `<em>~2 min · Role Evolution</em><br>This is the most important slide. <strong>The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow. The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.`,
     15: `<em>~2 min · Lessons</em><br>Six real lessons from 18 months. <strong>Infrastructure first</strong> — the Flare migration was painful and essential. <strong>Start with one skill</strong> and make it excellent before expanding. <strong>Connect your tools first</strong> — without MCP, the agent is blind. <strong>Keep the human in the loop</strong> deliberately — the feedback loop is how skills improve over time. <strong>Measure before you optimize</strong> — we didn't know our cycle time was 12 days until we measured it. And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don't.`,
     16: `<em>~2 min · Takeaways</em><br>Five things to take home. [Walk through each.] <strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake: building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can't. <strong>MCP connectivity is the prerequisite, not the afterthought.</strong>`,
