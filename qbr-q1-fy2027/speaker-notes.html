@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q1 FY2027 QBR — Speaker Notes</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px; line-height: 1.6;
+      background: #0f1117; color: #e8eaf0;
+      padding: 40px 0 80px;
+    }
+    .page { max-width: 800px; margin: 0 auto; padding: 0 32px; }
+
+    /* Header */
+    .deck-header {
+      border-bottom: 1px solid #2e3244; padding-bottom: 24px; margin-bottom: 40px;
+    }
+    .deck-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #5b7cf6; margin-bottom: 8px; }
+    .deck-title { font-size: 28px; font-weight: 800; color: #f0f2fb; margin-bottom: 4px; }
+    .deck-meta { font-size: 13px; color: #6b7280; }
+
+    /* Slide block */
+    .slide-block { margin-bottom: 48px; }
+    .slide-header {
+      display: flex; align-items: baseline; gap: 12px;
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 1px solid #2e3244;
+    }
+    .slide-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: #5b7cf6; flex-shrink: 0;
+    }
+    .slide-title { font-size: 18px; font-weight: 700; color: #f0f2fb; }
+    .slide-timing { font-size: 11px; color: #6b7280; margin-left: auto; flex-shrink: 0; }
+
+    /* Script */
+    .script {
+      background: #1a1d27; border: 1px solid #2e3244; border-left: 3px solid #5b7cf6;
+      border-radius: 0 8px 8px 0; padding: 18px 20px; margin-bottom: 16px;
+      font-size: 14px; color: #c9cdd8; line-height: 1.75;
+    }
+    .script p { margin-bottom: 10px; }
+    .script p:last-child { margin-bottom: 0; }
+
+    /* Notes sections */
+    .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .note-box {
+      background: #13161f; border: 1px solid #2e3244; border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .note-box.full { grid-column: 1 / -1; }
+    .note-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .note-label.why   { color: #4ade80; }
+    .note-label.qa    { color: #fbbf24; }
+    .note-label.timer { color: #a78bfa; }
+    .note-label.avoid { color: #f87171; }
+    .note-body { font-size: 13px; color: #9ca3af; line-height: 1.6; }
+    .note-body strong { color: #f0f2fb; }
+    .note-body em { color: #5b7cf6; font-style: normal; }
+
+    /* Q&A pair */
+    .qa-q { font-size: 13px; color: #fbbf24; font-style: italic; margin-bottom: 4px; }
+    .qa-a { font-size: 13px; color: #9ca3af; }
+
+    /* Timing callout */
+    .timer-bar {
+      background: #1a1d27; border: 1px solid #a78bfa33; border-radius: 6px;
+      padding: 8px 14px; font-size: 12px; color: #a78bfa;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #111; padding: 20px 0; }
+      .script { background: #f8f9fa; border-color: #dee2e6; border-left-color: #4361ee; color: #222; }
+      .note-box { background: #f1f3f5; border-color: #dee2e6; }
+      .note-body, .qa-a { color: #444; }
+      .slide-block { page-break-inside: avoid; margin-bottom: 36px; }
+      .timer-bar { background: #f8f0ff; border-color: #c77dff; color: #6a0dad; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="deck-header">
+    <div class="deck-eyebrow">Idira &middot; Technical Writing Group</div>
+    <div class="deck-title">Q1 FY2027 QBR &mdash; Speaker Notes</div>
+    <div class="deck-meta">Presented to Peretz, CPO &nbsp;&middot;&nbsp; October 20, 2026 &nbsp;&middot;&nbsp; Target runtime: 15 minutes</div>
+  </div>
+
+  <!-- ── Slide 1 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 1</span>
+      <span class="slide-title">Cover</span>
+      <span class="slide-timing">Target: 60&ndash;75 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Peretz, I want to use our time today to show you three things: what we built this quarter, how it connects directly to the Cora AI strategy, and what we&rsquo;re doing next.</p>
+      <p>The short version: the TW team is no longer a writing team. We are an AI platform &mdash; and the platform is live.</p>
+      <p>I&rsquo;ll walk you through the evidence in about 20 minutes. I&rsquo;ve kept it tight on purpose &mdash; I want to leave room for your questions.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Names the Cora AI connection immediately &mdash; he&rsquo;s listening for it from slide 1. <strong>&ldquo;AI platform&rdquo;</strong> positions the team at CPO level, not ops level.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label avoid">Do NOT say</div>
+        <div class="note-body">&ldquo;This quarter was really exciting for us&hellip;&rdquo;<br>&ldquo;I know you&rsquo;re busy so I&rsquo;ll try to be quick&hellip;&rdquo;<br>Any agenda slide &mdash; the cover IS the agenda.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 2 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 2</span>
+      <span class="slide-title">North Star</span>
+      <span class="slide-timing">Target: 90 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Before I show you what we built, I want to show you where we&rsquo;re going &mdash; because it puts everything else in context.</p>
+      <p>The north star is this: documentation stops being something a writer produces, and becomes something the organization governs. AI does the production. Writers do the judgment.</p>
+      <p>We are currently in Stage 1 &mdash; AI assists the writer. 12 skills shipped, telemetry live, cross-org programs running. That&rsquo;s Q1.</p>
+      <p>Stage 2 is Q2 &mdash; TW skills get integrated into AION, the R&amp;D ADLC, and quality gets a benchmark &mdash; a defined standard every page is measured against.</p>
+      <p>Stage 3 is where this is going: engineering ships a feature, AI generates the first draft from the spec, the health pipeline scores it before it goes live, and Cora AI ingests it automatically. Writers architect the system &mdash; they don&rsquo;t produce the content.</p>
+      <p>And here&rsquo;s why this matters to you specifically: Cora AI is only as trustworthy as what it ingests. If the knowledge base is inconsistent and unscored &mdash; Cora AI is unreliable by design. This program and the Cora AI product strategy are the same bet.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Opens with destination before journey. The Cora AI hook makes everything that follows feel strategic, not operational.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;When does Stage 3 happen?&rdquo;</div>
+          <div class="qa-a">&ldquo;Stage 3 requires Stage 2, and Stage 2 requires the RAG infrastructure decision. That&rsquo;s one of the things I want your input on today.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 3 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 3</span>
+      <span class="slide-title">How We Measure Success</span>
+      <span class="slide-timing">Target: 60 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Before I show you what we built, here&rsquo;s how we know it&rsquo;s working.</p>
+      <p>Four metrics. AI-assisted output at 75&ndash;80% &mdash; that&rsquo;s the share of content touched by AI before a writer reviews it. Cycle time at three days or less, down from twelve. Quality Score &mdash; every high-traffic page gets a green score by Q2. And the fourth: we are reducing the team by five positions while maintaining delivery output &mdash; AI is absorbing the capacity gap.</p>
+      <p>These four numbers are our contract with ourselves. Everything I&rsquo;m about to show you connects back to moving one of these.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Setting the metrics before the evidence means Peretz evaluates every slide against a framework you defined &mdash; not one he invents. It signals rigor and ownership.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;How do you maintain delivery with fewer people?&rdquo;</div>
+          <div class="qa-a">&ldquo;AI skills are absorbing the recurring work. 12 skills in production means 12 workflows running without a writer. The team shifts from producing to governing.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 4 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 4</span>
+      <span class="slide-title">Closing the Loop</span>
+      <span class="slide-timing">Target: 90 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Before I show you the results, I want to close the loop on what we said we&rsquo;d do last quarter &mdash; because accountability matters.</p>
+      <p>In Q4 we made five commitments. Three are fully delivered. Two are in progress and on track.</p>
+      <p>The three delivered: we built the quality telemetry system &mdash; that&rsquo;s 3,668 pages cataloged and a pilot that validated the model. We launched four cross-org AI programs with Support, Legal, and Product. And we shipped the AI skills ecosystem &mdash; 19 skills, including the three that were specifically on the Q4 roadmap.</p>
+      <p>The two in progress: the RAG-readiness strategy is designed and presented &mdash; it&rsquo;s waiting on a product decision, which I&rsquo;ll come back to. And the MkDocs infrastructure migration is 70% complete by Q1 end &mdash; full deployment continues in Q2.</p>
+      <p>Three of five, fully done. Nothing fell off the list.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Leading with accountability <strong>before</strong> results is a power move. &ldquo;Nothing fell off the list&rdquo; is clean and confident.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;What&rsquo;s blocking the RAG decision?&rdquo;</div>
+          <div class="qa-a">&ldquo;It&rsquo;s a product call &mdash; we need a go/no-go on whether Cora AI should ingest structured docs before Q2 planning closes. The infrastructure is ready on our side.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 5 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 5</span>
+      <span class="slide-title">Getting to the North Star &mdash; Together</span>
+      <span class="slide-timing">Target: 75 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;One thing that changed this quarter is that TW stopped being a downstream team. We&rsquo;re now embedded in four cross-organizational programs.</p>
+      <p>With Customer Support: we built a feedback loop so that high-priority escalations trigger a documentation work item &mdash; customer pain becomes a prioritized fix, not an anecdote.</p>
+      <p>With Knowledge Management: AI analyzes the support KB and surfaces what customers are learning from support articles instead of the official docs. That gap closes into the docs layer, where it scales to every customer.</p>
+      <p>With Legal: third-party license notice publishing &mdash; previously manual and error-prone &mdash; now runs automatically on every release cycle.</p>
+      <p>With Product: we&rsquo;re building the AI publishing ecosystem for the Marketplace, so documentation quality extends to partners and external contributors, not just our team.</p>
+      <p>The pattern is the same in all four: AI makes organizational scale possible without removing human judgment.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Opens with the strategic shift &mdash; <strong>TW as platform</strong> &mdash; before listing programs. Each program gets one sentence. The closing pattern line makes this feel repeatable, not ad-hoc.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;How much of your team&rsquo;s time do these programs take?&rdquo;</div>
+          <div class="qa-a">&ldquo;AI does the heavy lifting. Our role is to define standards and review output. Third-Party Notices went from writer-hours per release to near-zero once built.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Slide 6 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 6</span>
+      <span class="slide-title">Spotlight: Doc Health Initiative</span>
+      <span class="slide-timing">Target: 75 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Let me go one level deeper on Pillar 1, because this is the initiative I&rsquo;m most excited about strategically.</p>
+      <p>The problem we solved: documentation quality has always been invisible. You couldn&rsquo;t answer &lsquo;is this page good?&rsquo; without a writer reading it. We changed that.</p>
+      <p>The pipeline is four steps: AI reads the page and scores it on a structured rubric. The score is combined with traffic data to produce a priority rank &mdash; so we fix the pages that hurt the most users first. The output goes into a machine-readable catalog. A writer reviews the AI-proposed fix and opens a PR.</p>
+      <p>The pilot: 24 highest-traffic pages. The top page &mdash; CyberArk REST Web Services API &mdash; gets 2,427 unique views. It scored ORANGE. There&rsquo;s a PR open. Every single pilot page has a writer on it.</p>
+      <p>Ben Skelker is scaling this in Q2: close all 11 RED-tier pages, expand scoring to 200+ pages, and eventually make a health score a publishing gate &mdash; content doesn&rsquo;t go live if it scores below threshold.</p>
+      <p>This is how you govern a knowledge base at scale.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body">Naming the top page with its UV count makes the abstract concrete. <strong>&ldquo;Publishing gate&rdquo;</strong> shows you&rsquo;re thinking like a product manager.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;What does ORANGE mean? How bad is it?&rdquo;</div>
+          <div class="qa-a">&ldquo;ORANGE = significant issues but not broken. RED = a user following the page could fail. We have 11 RED pages, all with PRs open. Those are Q2 priority.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+    <div class="timer-bar">&#9203; Timing check &mdash; target ~11 minutes elapsed. Slides 8 and 9 can be 60 sec each if running long.</div>
+  </div>
+
+  <!-- ── Slide 7 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 7</span>
+      <span class="slide-title">Q2 FY2027 &mdash; What&rsquo;s Next</span>
+      <span class="slide-timing">Target: 60 sec</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;Q2 is not a pivot &mdash; it&rsquo;s an acceleration. Everything here extends what we built this quarter.</p>
+      <p>Three High priorities: fix all 11 RED-tier pages. Skills orchestration phase 2 &mdash; connecting skills into end-to-end automated workflows. And the SwaggerHub onboarding skill for API doc automation.</p>
+      <p>On the Medium side: batch frontmatter generation and CORA-AI RAG ingestion pre-filtering &mdash; that&rsquo;s the infrastructure that makes the knowledge base machine-digestible. Expanding the health catalog to 50 scored pages. And the FIA-in-docs feedback mechanism &mdash; capturing user feedback at the point of reading, triaging to support or doc fix, and auto-drafting PRs when action is recommended.</p>
+      <p>The platform is built. Q2 scales it.&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box">
+        <div class="note-label why">Why this works</div>
+        <div class="note-body"><strong>&ldquo;Not a pivot &mdash; an acceleration&rdquo;</strong> reassures immediately. &ldquo;The platform is built. Q2 scales it.&rdquo; is the clean close for the content section.</div>
+      </div>
+      <div class="note-box">
+        <div class="note-label qa">Likely Q &amp; A</div>
+        <div class="note-body">
+          <div class="qa-q">&ldquo;What&rsquo;s the biggest risk to Q2?&rdquo;</div>
+          <div class="qa-a">&ldquo;Capacity split between infrastructure and feature delivery &mdash; same as last quarter. Ring-fenced sprint allocation is the mitigation. The other risk is the RAG decision timing.&rdquo;</div>
+        </div>
+      </div>
+    </div>
+    <div class="timer-bar">&#9203; Timing check &mdash; target ~17 minutes elapsed. 3 minutes for Q&amp;A.</div>
+  </div>
+
+  <!-- ── Slide 8 ── -->
+  <div class="slide-block">
+    <div class="slide-header">
+      <span class="slide-num">Slide 8</span>
+      <span class="slide-title">Q&amp;A</span>
+      <span class="slide-timing">Target: 15 sec + silence</span>
+    </div>
+    <div class="script">
+      <p>&ldquo;That&rsquo;s the full picture. Platform built, results measured, Q2 scoped. What questions do you have?&rdquo;</p>
+    </div>
+    <div class="notes-grid">
+      <div class="note-box full">
+        <div class="note-label why">Then stop talking</div>
+        <div class="note-body">Let the silence work. The <strong>first question he asks</strong> tells you what he actually cares about. Don&rsquo;t fill the silence &mdash; let him lead.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

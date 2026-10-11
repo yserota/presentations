@@ -1,4 +1,4 @@
-ï»¿# Presentations
+# Presentations
 
 Conference and internal presentations by Yvonne Serota, Group Manager Technical Writing, Palo Alto Networks.
 
@@ -13,3 +13,4 @@ Published at: https://pages.github.cyberng.com/yvonnes/presentations
 ## Jira
 
 [DOC-25199](https://ca-il-jira.il.cyber-ark.com:8443/browse/DOC-25199)
+| [Q1 FY2027 QBR — AI Initiatives](/yvonnes/presentations/tree/main/qbr-q1-fy2027) | Internal QBR | October 20, 2026 |
