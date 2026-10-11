@@ -1305,6 +1305,21 @@
     if (d.type === 'request-state') { broadcastSlide(); }
     if (d.type === 'toggle-timer')  { toggleTimer(); }
     if (d.type === 'reset-timer')   { resetTimer(); }
+    if (d.type === 'change-slide')  {
+      // Presenter view navigated — jump to that slide
+      const target = d.to;
+      if (target >= 1 && target <= TOTAL && target !== current) {
+        getSlide(current).classList.remove('active');
+        current = target;
+        getSlide(current).classList.add('active');
+        document.getElementById('counter').textContent = current + ' / ' + TOTAL;
+        document.getElementById('btn-prev').disabled = current === 1;
+        document.getElementById('btn-next').disabled = current === TOTAL;
+        document.getElementById('progress').style.width = ((current / TOTAL) * 100) + '%';
+        updateNotes();
+        broadcastSlide();
+      }
+    }
   };
   function openPresenterView() {
     window.open('notes.html', 'presenter-view',

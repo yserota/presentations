@@ -8,7 +8,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg: #060810; --bg-card: #10172a; --bg-card2: #161f38;
-    --accent: #4d9de0; --accent2: #72b9f5; --accent-warm: #f4a261;
+    --accent: #4d9de0; --accent2: #72b9f5;
     --border: rgba(77,157,224,0.28); --border-dim: rgba(255,255,255,0.08);
     --text: #e4e8f2; --text-dim: #8997b0; --text-dimmer: #475569;
     --green: #3cb97c; --yellow: #d4a44b;
@@ -17,34 +17,34 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text); overflow: hidden; }
 
-  /* ── Header bar ── */
+  /* ── Header ── */
   #header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 24px; border-bottom: 1px solid var(--border-dim);
-    background: var(--bg-card); flex-shrink: 0;
+    padding: 10px 20px; border-bottom: 1px solid var(--border-dim);
+    background: var(--bg-card); flex-shrink: 0; gap: 16px;
   }
-  #slide-meta { display: flex; flex-direction: column; gap: 3px; }
+  #slide-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
   #slide-counter { font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--accent2); }
-  #slide-title { font-size: 16px; font-weight: 800; color: #fff; }
-  #timer-display { font-size: 36px; font-weight: 800; font-variant-numeric: tabular-nums;
-    color: var(--text-dimmer); cursor: pointer; user-select: none;
-    letter-spacing: -1px; }
+  #slide-title { font-size: 15px; font-weight: 800; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #timer-display { font-size: 32px; font-weight: 800; font-variant-numeric: tabular-nums;
+    color: var(--text-dimmer); cursor: pointer; user-select: none; letter-spacing: -1px; }
   #timer-display.running { color: var(--green); }
   #timer-display.warn    { color: var(--yellow); }
   #timer-label { font-size: 9px; text-align: center; color: var(--text-dimmer);
-    text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; cursor: pointer; }
+    text-transform: uppercase; letter-spacing: 0.08em; margin-top: 1px; cursor: pointer; }
 
   /* ── Notes area ── */
   #notes-area {
-    padding: 28px 36px 90px; overflow-y: auto;
-    height: calc(100vh - 72px);
+    padding: 24px 32px 96px; overflow-y: auto;
+    height: calc(100vh - 68px);
   }
   #notes-content { font-size: 19px; line-height: 1.85; color: #c8d0e0; }
   #notes-content strong { color: #fff; }
   #notes-content em {
     display: block; font-style: normal;
-    font-size: 13px; font-weight: 700; color: var(--accent2);
+    font-size: 12px; font-weight: 700; color: var(--accent2);
     text-transform: uppercase; letter-spacing: 0.08em;
     margin-bottom: 14px; padding-bottom: 10px;
     border-bottom: 1px solid var(--border-dim);
@@ -53,23 +53,37 @@
   /* ── Waiting state ── */
   #waiting {
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; height: 60vh; gap: 14px; text-align: center;
+    justify-content: center; height: 55vh; gap: 14px; text-align: center;
   }
-  #waiting .icon { font-size: 40px; }
-  #waiting .msg { font-size: 16px; color: var(--text-dim); }
-  #waiting .hint { font-size: 13px; color: var(--text-dimmer); max-width: 360px; line-height: 1.6; }
+  #waiting .icon { font-size: 36px; }
+  #waiting .msg  { font-size: 15px; color: var(--text-dim); }
+  #waiting .hint { font-size: 12px; color: var(--text-dimmer); max-width: 340px; line-height: 1.6; }
 
-  /* ── Next slide footer ── */
+  /* ── Footer nav ── */
   #footer {
     position: fixed; bottom: 0; left: 0; right: 0;
-    padding: 10px 24px; background: var(--bg-card2);
-    border-top: 1px solid var(--border-dim);
+    padding: 0 16px; background: var(--bg-card2);
+    border-top: 2px solid var(--border-dim);
     display: flex; align-items: center; gap: 10px;
-    font-size: 12px;
+    height: 56px;
   }
-  #footer .label { color: var(--text-dimmer); text-transform: uppercase;
-    font-size: 9px; font-weight: 700; letter-spacing: 0.1em; }
-  #next-title { color: var(--text-dim); }
+  .nav-btn {
+    background: rgba(77,157,224,0.12); border: 1px solid var(--border);
+    color: var(--text); font-size: 20px; cursor: pointer;
+    border-radius: 8px; width: 44px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s, color .15s; flex-shrink: 0;
+  }
+  .nav-btn:hover:not(:disabled) { background: rgba(77,157,224,0.24); color: #fff; }
+  .nav-btn:disabled { opacity: 0.25; cursor: default; }
+  #nav-counter { font-size: 13px; font-weight: 700; color: var(--text-dim);
+    min-width: 60px; text-align: center; }
+  #footer-next-wrap { display: flex; align-items: center; gap: 6px;
+    margin-left: auto; overflow: hidden; }
+  #footer-next-label { font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--text-dimmer); white-space: nowrap; }
+  #next-title { font-size: 12px; color: var(--text-dim);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 280px; }
 
   /* ── Progress bar ── */
   #progress {
@@ -84,10 +98,10 @@
 
 <div id="header">
   <div id="slide-meta">
-    <div id="slide-counter">Waiting for presentation…</div>
-    <div id="slide-title"></div>
+    <div id="slide-counter">Presenter View</div>
+    <div id="slide-title">Open the presentation to sync — or use ← → to navigate</div>
   </div>
-  <div style="text-align:center">
+  <div style="text-align:center;flex-shrink:0">
     <div id="timer-display" onclick="toggleTimer()" title="Click to start/stop · Double-click to reset">0:00</div>
     <div id="timer-label" onclick="toggleTimer()">click to start</div>
   </div>
@@ -97,28 +111,34 @@
   <div id="waiting">
     <div class="icon">🖥️</div>
     <div class="msg">Presenter View ready</div>
-    <div class="hint">Open the main presentation in another window — notes will sync automatically as you advance slides.</div>
+    <div class="hint">Navigate with ← → keys or the buttons below. The main presentation window will stay in sync.</div>
   </div>
   <div id="notes-content" style="display:none"></div>
 </div>
 
 <div id="footer">
-  <span class="label">Next →</span>
-  <span id="next-title">—</span>
+  <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" title="Previous (← key)">←</button>
+  <span id="nav-counter">— / 17</span>
+  <button class="nav-btn" id="btn-next" onclick="navigate(1)" title="Next (→ key)">→</button>
+  <div id="footer-next-wrap">
+    <span id="footer-next-label">Next →</span>
+    <span id="next-title">—</span>
+  </div>
 </div>
 
 <script>
   const TOTAL = 17;
+
   const SLIDE_TITLES = {
-    1: 'Title',
-    2: 'Context — The PAN TW Team',
-    3: 'Our Organization — Two Pillars',
-    4: 'The Problem',
-    5: 'The Approach — Not Copilot. Agentic.',
-    6: 'The Platform — Why Cursor',
-    7: 'The Skills Library',
-    8: 'The ADLC',
-    9: 'Deep Dive — TW Feature Doc',
+    1:  'Title',
+    2:  'Context — The PAN TW Team',
+    3:  'Our Organization — Two Pillars',
+    4:  'The Problem',
+    5:  'The Approach — Not Copilot. Agentic.',
+    6:  'The Platform — Why Cursor',
+    7:  'The Skills Library',
+    8:  'The ADLC',
+    9:  'Deep Dive — TW Doc Write + TW Doc Review',
     10: 'Broader Impact',
     11: 'Doc Health Initiative',
     12: 'Day in the Life',
@@ -129,25 +149,72 @@
     17: 'Thank You',
   };
 
+  const SLIDE_NOTES = {
+    1:  `<em>~1 min · Opening</em><br>Good [morning/afternoon], everyone. I'm Yvonne Serota — I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry. <strong>What I'm sharing today isn't a vision — it's what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.`,
+    2:  `<em>~1.5 min · Context</em><br>Let me set the scene. 20+ writers, two major repos, dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content. Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.`,
+    3:  `<em>~1.5 min · Organization</em><br>So how did we structure ourselves to solve this? We split into two pillars. The Standards &amp; Operations Hub owns tooling, infrastructure, and AI platform — led by Vita Gilin. Delivery Writing Pods are the execution layer. <strong>The critical insight</strong>: you can't build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential — and not obvious to us at first.`,
+    4:  `<em>~1.5 min · The Problem</em><br>Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one. <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&amp;D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.`,
+    5:  `<em>~1.5 min · Approach</em><br>The temptation was to give writers a ChatGPT window and call it done. That's what most teams did. The distinction that drove everything: <strong>a prompt is one-shot, lives in a chat window, dies there</strong>. A skill is versioned, team-shared, and works the same way every time. The core insight on the right — "AI doesn't help if it doesn't understand your workflow, your tools, your data" — is the north star we kept returning to whenever we debated priorities.`,
+    6:  `<em>~2 min · Platform</em><br>We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP — the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run. <strong>The Flare → MkDocs migration was the infrastructure prerequisite</strong> — Markdown is agent-readable. We couldn't have built any of this on binary Flare files.`,
+    7:  `<em>~2 min · Skills</em><br>Let me walk through the library. The biggest change since we last shared any of this: Ben Skelker refactored TW Feature Doc into two specialized skills — <strong>TW Doc Write</strong> for creating and updating docs from source material, and <strong>TW Doc Review</strong> for assessing existing pages in a fresh session. The split matters: a reviewer that knows why every sentence is there is the wrong reviewer.<br><br>Open PR handles the editorial pass and PR creation. DCI Pipeline is our team health measurement system. Day Manager synthesizes my email, calendar, and Jira every morning. Two in development: automated PR review and UI path validation.<br><br><strong>The design principle across all of them</strong>: each skill knows exactly where to find context, what to do with it, how to validate the output, and when to hand off to a human.`,
+    8:  `<em>~1.5 min · ADLC</em><br>The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>. <strong>TW Doc Write</strong> covers Discovery + Authoring — phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices.<br><br>Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters.`,
+    9:  `<em>~2 min · Deep Dive</em><br>Let me show you the two-skill workflow in detail. <strong>TW Doc Write</strong>: writer types one command, agent gathers all context via MCP, pins the style guide, writes the complete Markdown draft. Writer reviews and refines.<br><br>Then — and this is new — the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness.<br><br><strong>Discovery + draft: under 30 minutes. Quality review: minutes, not a review cycle.</strong>`,
+    10: `<em>~1.5 min · Broader Impact</em><br>Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command. The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.`,
+    11: `<em>~1.5 min · Doc Health</em><br>Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50. The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.`,
+    12: `<em>~1.5 min · Day in the Life</em><br>I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week.<br><br>Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>`,
+    13: `<em>~1.5 min · Numbers</em><br>Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>10 skills in the library, 8 live</strong> — that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80–0.95 is the sustainability zone.<br><br>The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.`,
+    14: `<em>~2 min · Role Evolution</em><br>This is the most important slide. <strong>The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow.<br><br>The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.`,
+    15: `<em>~2 min · Lessons</em><br>Six real lessons from 18 months.<br><br><strong>Infrastructure first</strong> — the Flare migration was painful and essential.<br><strong>Start with one skill</strong> and make it excellent before expanding.<br><strong>Connect your tools first</strong> — without MCP, the agent is blind.<br><strong>Keep the human in the loop</strong> deliberately — the feedback loop is how skills improve over time.<br><strong>Measure before you optimize</strong> — we didn't know our cycle time was 12 days until we measured it.<br>And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don't.`,
+    16: `<em>~2 min · Takeaways</em><br>Five things to take home. [Walk through each.]<br><br><strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake: building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can't. <strong>MCP connectivity is the prerequisite, not the afterthought.</strong>`,
+    17: `<em>~1 min · Closing</em><br>Thank you. Happy to go deeper on any of this — the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership. Come find me, or reach out via the Skills library repo — it's linked on screen. [Open for questions]`,
+  };
+
+  // ── State ──────────────────────────────────────────────────────────────────
+  let localSlide = 1;
+
+  // ── Navigation ─────────────────────────────────────────────────────────────
+  function showSlide(n) {
+    if (n < 1 || n > TOTAL) return;
+    localSlide = n;
+    document.getElementById('slide-counter').textContent = 'Slide ' + n + ' of ' + TOTAL;
+    document.getElementById('slide-title').textContent   = SLIDE_TITLES[n] || '';
+    document.getElementById('notes-content').innerHTML   = SLIDE_NOTES[n] || '(no notes)';
+    document.getElementById('notes-content').style.display = 'block';
+    document.getElementById('waiting').style.display    = 'none';
+    document.getElementById('next-title').textContent   = SLIDE_TITLES[n + 1] || '— (last slide)';
+    document.getElementById('nav-counter').textContent  = n + ' / ' + TOTAL;
+    document.getElementById('progress').style.width     = ((n / TOTAL) * 100) + '%';
+    document.getElementById('btn-prev').disabled        = n === 1;
+    document.getElementById('btn-next').disabled        = n === TOTAL;
+    document.getElementById('notes-area').scrollTop     = 0;
+  }
+
+  function navigate(dir) {
+    const next = localSlide + dir;
+    if (next < 1 || next > TOTAL) return;
+    showSlide(next);
+    // Tell the main presentation window to follow
+    channel.postMessage({ type: 'change-slide', to: next });
+  }
+
+  // ── Keyboard ───────────────────────────────────────────────────────────────
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); navigate(-1); }
+    if (e.key === 't' || e.key === 'T') { toggleTimer(); }
+  });
+
   // ── BroadcastChannel sync ──────────────────────────────────────────────────
   const channel = new BroadcastChannel('onTarget-2026-presenter');
 
   channel.onmessage = function(e) {
     const d = e.data;
     if (d.type === 'slide') {
-      const n = d.slide;
-      document.getElementById('slide-counter').textContent = 'Slide ' + n + ' of ' + d.total;
-      document.getElementById('slide-title').textContent   = SLIDE_TITLES[n] || '';
-      document.getElementById('notes-content').innerHTML   = d.notes || '(no notes for this slide)';
-      document.getElementById('notes-content').style.display = 'block';
-      document.getElementById('waiting').style.display    = 'none';
-      document.getElementById('next-title').textContent   = SLIDE_TITLES[n + 1] || '— (last slide)';
-      document.getElementById('progress').style.width     = ((n / d.total) * 100) + '%';
-      document.getElementById('notes-area').scrollTop     = 0;
+      // Main window pushed a slide — sync local state without re-broadcasting
+      showSlide(d.slide);
     }
     if (d.type === 'timer') {
       renderTimer(d.timer, d.timerRunning);
-      // Keep local timer in sync
       if (d.timerRunning && !timerRunning) {
         timerElapsed = d.timer;
         timerStart = Date.now() - timerElapsed * 1000;
@@ -160,12 +227,10 @@
     }
   };
 
-  // Request current state on open
-  setTimeout(function() {
-    channel.postMessage({ type: 'request-state' });
-  }, 200);
+  // Request current state from main window on open
+  setTimeout(function() { channel.postMessage({ type: 'request-state' }); }, 200);
 
-  // ── Local timer (for smooth updates between broadcasts) ────────────────────
+  // ── Timer ──────────────────────────────────────────────────────────────────
   let timerStart = null, timerInterval = null, timerRunning = false, timerElapsed = 0;
 
   function localTick() {
@@ -180,12 +245,15 @@
     document.getElementById('timer-label').textContent = running ? 'running' : 'click to start';
   }
   function toggleTimer() {
-    channel.postMessage({ type: 'toggle-timer' }); // tell main window to toggle
+    channel.postMessage({ type: 'toggle-timer' });
   }
   document.getElementById('timer-display').addEventListener('dblclick', function(e) {
     e.stopPropagation();
     channel.postMessage({ type: 'reset-timer' });
   });
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  showSlide(1);
 </script>
 </body>
 </html>
