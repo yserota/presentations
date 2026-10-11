@@ -221,7 +221,7 @@
   #s1 .meta-item { font-size: 13px; color: var(--text-dim); }
   #s1 .meta-item strong { color: var(--text); }
   #s1 .meta-sep { width: 1px; height: 22px; background: var(--border-dim); }
-  #s1 .Palo Alto Networks-badge { display: flex; align-items: center; gap: 8px; }
+  #s1 .pan-badge { display: flex; align-items: center; gap: 8px; }
 
   /* ── Day-in-life slide ── */
   .day-block { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 8px; padding: 10px 14px; }
@@ -230,7 +230,30 @@
   .day-detail { font-size: 10.5px; color: var(--text-dim); line-height: 1.4; }
   .day-ai { display: inline-flex; align-items: center; gap: 4px; background: rgba(60,185,124,0.1); border: 1px solid rgba(60,185,124,0.2); border-radius: 4px; padding: 2px 7px; font-size: 9.5px; color: var(--green); font-weight: 600; margin-top: 4px; }
 
-</style>
+  /* ── Speaker Notes Panel ── */
+  #notes-panel {
+    position: fixed; bottom: 66px; left: 0; right: 0;
+    background: rgba(4,6,14,0.97); border-top: 2px solid var(--accent);
+    padding: 14px 72px; font-size: 13px; color: var(--text-dim);
+    line-height: 1.7; z-index: 200; display: none;
+    max-height: 190px; overflow-y: auto;
+  }
+  #notes-panel.visible { display: block; }
+  #notes-label { font-size: 9px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--accent); margin-bottom: 7px; }
+  #notes-text strong { color: #fff; }
+  #notes-text em { color: var(--accent2); font-style: normal; }
+
+  /* ── Timer ── */
+  #timer { font-size: 12px; color: var(--text-dimmer); cursor: pointer;
+    min-width: 46px; text-align: center; user-select: none; }
+  #timer.running { color: var(--green); }
+  #timer.warn { color: var(--yellow); }
+  #notes-toggle { font-size: 11px; color: var(--text-dimmer); cursor: pointer;
+    padding: 2px 8px; border-radius: 5px; transition: color .15s, background .15s; }
+  #notes-toggle:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+  #notes-toggle.on { color: var(--accent2); }
+
 </head>
 <body>
 
@@ -250,7 +273,7 @@
     <div class="main-title">From AI to<br><span>Everyday Practice:</span><br>Operationalizing AI in Technical Writing</div>
     <div class="tagline">How the Palo Alto Networks Technical Writing team went from experimenting with prompts<br>to running a fully agentic documentation pipeline &mdash; with real skills, real data, and a new role.</div>
     <div class="meta">
-      <div class="meta-item Palo Alto Networks-badge">
+      <div class="meta-item pan-badge">
         <div style="width:28px;height:28px;border-radius:6px;background:rgba(77,157,224,0.15);display:flex;align-items:center;justify-content:center;border:1px solid var(--border)">
           <span style="font-size:14px;font-weight:800;color:var(--accent2)">PA</span>
         </div>
@@ -264,7 +287,7 @@
   <!-- ════════════════════════════════════════ -->
   <!-- SLIDE 2 · Context & Team                 -->
   <!-- ════════════════════════════════════════ -->
-  <div class="slide" id="s3">
+  <div class="slide" id="s2">
     <div class="section-label">Context</div>
     <div class="eyebrow">Who We Are</div>
     <div class="slide-title">The Palo Alto Networks TW Team</div>
@@ -321,7 +344,7 @@
   <!-- ════════════════════════════════════════ -->
   <!-- SLIDE 2 · Team Organization              -->
   <!-- ════════════════════════════════════════ -->
-  <div class="slide" id="s2">
+  <div class="slide" id="s3">
     <div class="section-label">Our Organization</div>
     <div class="eyebrow">How We're Structured</div>
     <div class="slide-title">Two Pillars: SOH &amp; Writing Pods</div>
@@ -866,7 +889,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-value">9</div>
-        <div class="stat-label">Skills in the library<br><span style="color:var(--text-dimmer)">6 live, 3 in dev</span></div>
+        <div class="stat-label">Skills in the library<br><span style="color:var(--text-dimmer)">7 live, 2 in dev</span></div>
       </div>
       <div class="stat-item">
         <div class="stat-value accent">0.80&ndash;0.95</div>
@@ -1168,18 +1191,70 @@
 </div><!-- /scaler -->
 </div><!-- /viewport -->
 
+<!-- Speaker Notes Panel -->
+<div id="notes-panel">
+  <div id="notes-label">📝 Speaker Notes — <span id="notes-slide-label"></span></div>
+  <div id="notes-text"></div>
+</div>
+
 <!-- Navigation -->
 <div id="nav">
   <button id="btn-prev" onclick="changeSlide(-1)" title="Previous (←)">&#8592;</button>
   <span class="counter" id="counter">1 / 17</span>
   <button id="btn-next" onclick="changeSlide(1)" title="Next (→)">&#8594;</button>
   <span style="margin-left:10px;color:var(--text-dimmer);font-size:11px">&#8592; &#8594; arrow keys</span>
+  <span style="width:1px;height:16px;background:var(--border-dim);margin:0 6px;display:inline-block"></span>
+  <span id="timer" onclick="toggleTimer()" title="Click to start/stop · Double-click to reset">0:00</span>
+  <span style="width:1px;height:16px;background:var(--border-dim);margin:0 6px;display:inline-block"></span>
+  <span id="notes-toggle" onclick="toggleNotes()" title="Toggle speaker notes (N)">Notes</span>
 </div>
 
 <script>
   const TOTAL = 17;
   let current = 1;
 
+  // ── Speaker Notes ──────────────────────────────────────────────────────────
+  const SLIDE_TITLES = {
+    1:  'Title',
+    2:  'Context — The PAN TW Team',
+    3:  'Our Organization — Two Pillars',
+    4:  'The Problem',
+    5:  'The Approach — Not Copilot. Agentic.',
+    6:  'The Platform — Why Cursor',
+    7:  'The Skills Library',
+    8:  'The ADLC',
+    9:  'Deep Dive — TW Feature Doc',
+    10: 'Broader Impact',
+    11: 'Doc Health Initiative',
+    12: 'Day in the Life',
+    13: 'The Numbers',
+    14: 'Role Evolution',
+    15: 'Lessons Learned',
+    16: 'Key Takeaways',
+    17: 'Thank You',
+  };
+
+  const SLIDE_NOTES = {
+    1: `<em>~1 min · Opening</em><br>Good [morning/afternoon], everyone. I'm Yvonne Serota — I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry. <strong>What I'm sharing today isn't a vision — it's what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.`,
+    2: `<em>~1.5 min · Context</em><br>Let me set the scene. 20+ writers, two major repos, dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content. Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.`,
+    3: `<em>~1.5 min · Organization</em><br>So how did we structure ourselves to solve this? We split into two pillars. The Standards & Operations Hub owns tooling, infrastructure, and AI platform — led by Vita Gilin. Delivery Writing Pods are the execution layer. <strong>The critical insight</strong>: you can't build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential — and not obvious to us at first.`,
+    4: `<em>~1.5 min · The Problem</em><br>Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one. <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.`,
+    5: `<em>~1.5 min · Approach</em><br>The temptation was to give writers a ChatGPT window and call it done. That's what most teams did. The distinction that drove everything: <strong>a prompt is one-shot, lives in a chat window, dies there</strong>. A skill is versioned, team-shared, and works the same way every time. The core insight on the right — "AI doesn't help if it doesn't understand your workflow, your tools, your data" — is the north star we kept returning to whenever we debated priorities.`,
+    6: `<em>~2 min · Platform</em><br>We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP — the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run. <strong>The Flare → MkDocs migration was the infrastructure prerequisite</strong> — Markdown is agent-readable. We couldn't have built any of this on binary Flare files.`,
+    7: `<em>~2 min · Skills</em><br>Let me walk through the library. TW Feature Doc is the core — give it a Jira ticket, get a full draft. Open PR handles the editorial pass and PR creation. DCI Pipeline is our team health measurement system. Day Manager synthesizes my email, calendar, and Jira every morning. Two in development: automated PR review and UI path validation. <strong>The design principle</strong>: each skill knows exactly where to look for context, what to do with it, how to validate the output, and when to hand off to a human. That's the difference between a skill and a prompt.`,
+    8: `<em>~1.5 min · ADLC</em><br>The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>. Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters. The agent surfaces everything; the writer decides.`,
+    9: `<em>~2 min · Deep Dive</em><br>Let me show you TW Feature Doc in detail, because the steps are instructive. Step 1: writer types one command with the Jira ticket ID. Steps 2–4 are fully agent-driven: context gathering from every connected tool, reading the style guide, generating the complete Markdown draft. Step 5: writer reviews. That's it. <strong>Discovery + first draft: from 2–3 days to under 30 minutes</strong>. Not because the AI is magic — because MCP gives it all the context automatically. The writer's time shifts to judgment, not production.`,
+    10: `<em>~1.5 min · Broader Impact</em><br>Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command. The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.`,
+    11: `<em>~1.5 min · Doc Health</em><br>Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50. The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.`,
+    12: `<em>~1.5 min · Day in the Life</em><br>I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week. Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>`,
+    13: `<em>~1.5 min · Numbers</em><br>Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>7 skills live, 2 in dev</strong>. DCI target range 0.80–0.95 is the sustainability zone: enough demand to keep the team engaged, not so much that we're constantly overloaded. The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.`,
+    14: `<em>~2 min · Role Evolution</em><br>This is the most important slide. <strong>The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow. The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.`,
+    15: `<em>~2 min · Lessons</em><br>Six real lessons from 18 months. <strong>Infrastructure first</strong> — the Flare migration was painful and essential. <strong>Start with one skill</strong> and make it excellent before expanding. <strong>Connect your tools first</strong> — without MCP, the agent is blind. <strong>Keep the human in the loop</strong> deliberately — the feedback loop is how skills improve over time. <strong>Measure before you optimize</strong> — we didn't know our cycle time was 12 days until we measured it. And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don't.`,
+    16: `<em>~2 min · Takeaways</em><br>Five things to take home. [Walk through each.] <strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake: building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can't. <strong>MCP connectivity is the prerequisite, not the afterthought.</strong>`,
+    17: `<em>~1 min · Closing</em><br>Thank you. Happy to go deeper on any of this — the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership. Come find me, or reach out via the Skills library repo — it's linked on screen. [Open for questions]`,
+  };
+
+  // ── Navigation ─────────────────────────────────────────────────────────────
   function getSlide(n) { return document.getElementById('s' + n); }
 
   function changeSlide(dir) {
@@ -1192,23 +1267,70 @@
     document.getElementById('btn-prev').disabled = current === 1;
     document.getElementById('btn-next').disabled = current === TOTAL;
     document.getElementById('progress').style.width = ((current / TOTAL) * 100) + '%';
+    updateNotes();
   }
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); changeSlide(-1); }
+    if (e.key === 'n' || e.key === 'N') { toggleNotes(); }
+    if (e.key === 't' || e.key === 'T') { toggleTimer(); }
   });
 
+  // ── Speaker Notes ───────────────────────────────────────────────────────────
+  let notesVisible = false;
+  function toggleNotes() {
+    notesVisible = !notesVisible;
+    document.getElementById('notes-panel').classList.toggle('visible', notesVisible);
+    document.getElementById('notes-toggle').classList.toggle('on', notesVisible);
+    updateNotes();
+  }
+  function updateNotes() {
+    if (!notesVisible) return;
+    const n = current;
+    document.getElementById('notes-slide-label').textContent = 'Slide ' + n + ' — ' + (SLIDE_TITLES[n] || '');
+    document.getElementById('notes-text').innerHTML = SLIDE_NOTES[n] || '(no notes)';
+  }
+
+  // ── Timer ──────────────────────────────────────────────────────────────────
+  let timerStart = null, timerInterval = null, timerRunning = false, timerElapsed = 0;
+  function toggleTimer() {
+    const el = document.getElementById('timer');
+    if (timerRunning) {
+      clearInterval(timerInterval); timerRunning = false;
+      timerElapsed = Math.floor((Date.now() - timerStart) / 1000);
+      el.classList.remove('running');
+    } else {
+      timerStart = Date.now() - timerElapsed * 1000;
+      timerInterval = setInterval(updateTimer, 500);
+      timerRunning = true; el.classList.add('running');
+    }
+  }
+  function resetTimer() {
+    clearInterval(timerInterval); timerRunning = false; timerElapsed = 0; timerStart = null;
+    const el = document.getElementById('timer');
+    el.textContent = '0:00'; el.classList.remove('running', 'warn');
+  }
+  function updateTimer() {
+    const s = Math.floor((Date.now() - timerStart) / 1000);
+    const m = Math.floor(s / 60);
+    const el = document.getElementById('timer');
+    el.textContent = m + ':' + String(s % 60).padStart(2, '0');
+    if (s >= 1800) el.classList.add('warn');
+  }
+  document.getElementById('timer').addEventListener('dblclick', function(e) {
+    e.stopPropagation(); resetTimer();
+  });
+
+  // ── Scaler ─────────────────────────────────────────────────────────────────
   function scale() {
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const sw = 1280, sh = 720;
-    const s = Math.min(vw / sw, vh / sh);
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
     document.getElementById('scaler').style.transform = 'scale(' + s + ')';
   }
   window.addEventListener('resize', scale);
   scale();
 
-  // Init state
+  // ── Init ───────────────────────────────────────────────────────────────────
   document.getElementById('btn-prev').disabled = true;
   document.getElementById('progress').style.width = (1 / TOTAL * 100) + '%';
 </script>
