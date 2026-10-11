@@ -1194,7 +1194,7 @@
 
 <!-- Speaker Notes Panel -->
 <div id="notes-panel">
-  <div id="notes-label">📝 Speaker Notes — <span id="notes-slide-label"></span></div>
+  <div id="notes-label">📝 Speaker Notes — <span id="notes-slide-label"></span> &nbsp;·&nbsp; <span style="color:var(--yellow);font-size:9px;font-weight:700">⚠ VISIBLE DURING SCREEN SHARE — use ⊞ Presenter View instead</span></div>
   <div id="notes-text"></div>
 </div>
 
@@ -1207,7 +1207,9 @@
   <span style="width:1px;height:16px;background:var(--border-dim);margin:0 6px;display:inline-block"></span>
   <span id="timer" onclick="toggleTimer()" title="Click to start/stop · Double-click to reset">0:00</span>
   <span style="width:1px;height:16px;background:var(--border-dim);margin:0 6px;display:inline-block"></span>
-  <span id="notes-toggle" onclick="toggleNotes()" title="Toggle speaker notes (N)">Notes</span>
+  <span id="notes-toggle" onclick="toggleNotes()" title="Toggle inline notes (N) — visible to audience when screen sharing">Notes</span>
+  <span style="width:1px;height:16px;background:var(--border-dim);margin:0 6px;display:inline-block"></span>
+  <span id="presenter-btn" onclick="openPresenterView()" title="Open Presenter View in a separate window — safe for screen sharing" style="font-size:11px;color:var(--accent2);cursor:pointer;padding:2px 8px;border-radius:5px;font-weight:600;transition:color .15s,background .15s;">⊞ Presenter View</span>
 </div>
 
 <script>
@@ -1255,6 +1257,27 @@
     17: `<em>~1 min · Closing</em><br>Thank you. Happy to go deeper on any of this — the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership. Come find me, or reach out via the Skills library repo — it's linked on screen. [Open for questions]`,
   };
 
+  // ── Presenter Channel ──────────────────────────────────────────────────────
+  const presChannel = new BroadcastChannel('onTarget-2026-presenter');
+  function broadcastSlide() {
+    presChannel.postMessage({ type: 'slide', slide: current, total: TOTAL,
+      notes: SLIDE_NOTES[current] || '' });
+  }
+  function broadcastTimer(s, running) {
+    presChannel.postMessage({ type: 'timer', timer: s, timerRunning: running });
+  }
+  presChannel.onmessage = function(e) {
+    const d = e.data;
+    if (d.type === 'request-state') { broadcastSlide(); }
+    if (d.type === 'toggle-timer')  { toggleTimer(); }
+    if (d.type === 'reset-timer')   { resetTimer(); }
+  };
+  function openPresenterView() {
+    window.open('notes.html', 'presenter-view',
+      'width=880,height=640,scrollbars=yes,resizable=yes');
+    setTimeout(broadcastSlide, 400);
+  }
+
   // ── Navigation ─────────────────────────────────────────────────────────────
   function getSlide(n) { return document.getElementById('s' + n); }
 
@@ -1269,6 +1292,7 @@
     document.getElementById('btn-next').disabled = current === TOTAL;
     document.getElementById('progress').style.width = ((current / TOTAL) * 100) + '%';
     updateNotes();
+    broadcastSlide();
   }
 
   document.addEventListener('keydown', function(e) {
@@ -1306,11 +1330,13 @@
       timerInterval = setInterval(updateTimer, 500);
       timerRunning = true; el.classList.add('running');
     }
+    broadcastTimer(timerElapsed, timerRunning);
   }
   function resetTimer() {
     clearInterval(timerInterval); timerRunning = false; timerElapsed = 0; timerStart = null;
     const el = document.getElementById('timer');
     el.textContent = '0:00'; el.classList.remove('running', 'warn');
+    broadcastTimer(0, false);
   }
   function updateTimer() {
     const s = Math.floor((Date.now() - timerStart) / 1000);
@@ -1318,6 +1344,7 @@
     const el = document.getElementById('timer');
     el.textContent = m + ':' + String(s % 60).padStart(2, '0');
     if (s >= 1800) el.classList.add('warn');
+    if (s % 5 === 0) broadcastTimer(s, true); // broadcast every 5 sec to keep notes window in sync
   }
   document.getElementById('timer').addEventListener('dblclick', function(e) {
     e.stopPropagation(); resetTimer();
@@ -1334,6 +1361,7 @@
   // ── Init ───────────────────────────────────────────────────────────────────
   document.getElementById('btn-prev').disabled = true;
   document.getElementById('progress').style.width = (1 / TOTAL * 100) + '%';
+  broadcastSlide();
 </script>
 </body>
 </html>
