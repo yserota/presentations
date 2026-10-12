@@ -297,7 +297,7 @@
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="card">
           <h3>The Scale</h3>
-          <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">20+ technical writers across multiple teams &mdash; covering identity security, PAM, cloud security, and SaaS platforms. Two major documentation repos, dozens of product lines, and a globally distributed team.</p>
+          <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">20+ technical writers across multiple teams &mdash; covering identity security, PAM, cloud security, and SaaS platforms. Four major documentation repos (Monorepo, EPM, PAM-SH, and Conjur), dozens of product lines, and a globally distributed team.</p>
         </div>
         <div class="card">
           <h3>The Toolchain (Legacy)</h3>
@@ -315,7 +315,7 @@
             <div class="stat-label">Technical Writers</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value warm">2</div>
+            <div class="stat-value warm">4</div>
             <div class="stat-label">Major doc repos</div>
           </div>
           <div class="stat-item">
@@ -1273,7 +1273,7 @@
 
   const SLIDE_NOTES = {
     1: `<em>~1 min · Opening</em><br>Good [morning/afternoon], everyone. I'm Yvonne Serota — I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry. <strong>What I'm sharing today isn't a vision — it's what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.`,
-    2: `<em>~1.5 min · Context</em><br>Let me set the scene. 20+ writers, two major repos, dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content. Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.`,
+    2: `<em>~1.5 min · Context</em><br>Let me set the scene. 20+ writers, four major repos — Monorepo, EPM, PAM-SH, and Conjur — dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content. Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.`,
     3: `<em>~1.5 min · Organization</em><br>So how did we structure ourselves to solve this? We split into two pillars. The Standards & Operations Hub owns tooling, infrastructure, and AI platform — led by Vita Gilin. Delivery Writing Pods are the execution layer. <strong>The critical insight</strong>: you can't build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential — and not obvious to us at first.`,
     4: `<em>~1.5 min · The Problem</em><br>Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one. <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.`,
     5: `<em>~1.5 min · Approach</em><br>The temptation was to give writers a ChatGPT window and call it done. That's what most teams did. The distinction that drove everything: <strong>a prompt is one-shot, lives in a chat window, dies there</strong>. A skill is versioned, team-shared, and works the same way every time. The core insight on the right — "AI doesn't help if it doesn't understand your workflow, your tools, your data" — is the north star we kept returning to whenever we debated priorities.`,
