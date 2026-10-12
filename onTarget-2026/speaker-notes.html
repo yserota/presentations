@@ -3,395 +3,545 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Speaker Notes — From AI to Everyday Practice · onTarget 2026</title>
+<title>Speaker Notes &mdash; onTarget 2026</title>
 <style>
   :root {
-    --accent: #2563eb;
-    --accent-light: #dbeafe;
-    --text: #111827;
-    --text-dim: #4b5563;
-    --border: #e5e7eb;
-    --bg-note: #f9fafb;
+    --accent:     #4d9de0;
+    --bg:         #ffffff;
+    --bg2:        #f7f8fa;
+    --border:     #e5e7eb;
+    --text:       #111827;
+    --text-dim:   #4b5563;
+    --text-dimmer:#9ca3af;
+    --note-bg:    #f0f7ff;
+    --note-left:  #4d9de0;
+  }
+  body.dark {
+    --bg:         #0f1117;
+    --bg2:        #1a1d27;
+    --border:     #2a2d3e;
+    --text:       #f0f0f0;
+    --text-dim:   #a0aec0;
+    --text-dimmer:#6b7280;
+    --note-bg:    rgba(77,157,224,0.07);
+    --note-left:  #4d9de0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 15px; line-height: 1.65; color: var(--text);
-    background: #fff; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    transition: background 0.2s, color 0.2s;
   }
+
+  /* ── Sticky jump nav ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+
+  .nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-dimmer);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .nav-chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .nav-chip:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .dark-toggle {
+    margin-left: auto;
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 15px;
+    transition: border-color 0.12s;
+  }
+  .dark-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ── Cover ── */
   .cover {
-    padding: 48px 56px 36px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 24px 24px;
     border-bottom: 3px solid var(--accent);
   }
   .cover-tag {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
   }
-  .cover-title { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 8px; }
-  .cover-meta { font-size: 13px; color: var(--text-dim); display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
-  .cover-meta span { display: flex; align-items: center; gap: 5px; }
+  .cover-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .cover-meta {
+    font-size: 13px;
+    color: var(--text-dim);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+  }
 
   /* ── Timing bar ── */
   .timing-bar {
-    display: flex; flex-wrap: wrap; gap: 0;
-    border: 1px solid var(--border); border-radius: 8px;
-    overflow: hidden; margin: 28px 56px;
+    max-width: 720px;
+    margin: 20px auto 4px;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .t-chip {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
     font-size: 11px;
-  }
-  .timing-cell {
-    flex: 1; min-width: 0;
-    padding: 7px 10px; border-right: 1px solid var(--border);
+    color: var(--text-dim);
     text-align: center;
+    min-width: 36px;
   }
-  .timing-cell:last-child { border-right: none; }
-  .timing-cell .t-slide { font-weight: 700; color: var(--accent); }
-  .timing-cell .t-min { color: var(--text-dim); margin-top: 1px; }
+  .t-chip strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.2;
+  }
 
   /* ── Slide block ── */
   .slide-block {
-    padding: 28px 56px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px;
     border-bottom: 1px solid var(--border);
-    page-break-inside: avoid;
+    scroll-margin-top: 50px;
   }
-  .slide-block:last-child { border-bottom: none; }
+  .slide-block:last-child {
+    border-bottom: none;
+    padding-bottom: 80px;
+  }
 
   .slide-header {
-    display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
   }
   .slide-num {
-    font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--accent);
-    background: var(--accent-light); padding: 3px 10px;
-    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(77,157,224,0.12);
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
   }
   .slide-section {
-    font-size: 11px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--text-dim);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dimmer);
   }
   .slide-title-text {
-    font-size: 18px; font-weight: 800; color: var(--text);
-    line-height: 1.25; margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    color: var(--text);
   }
   .timing-tag {
-    display: inline-block; font-size: 11px; font-weight: 600;
-    color: var(--accent); background: var(--accent-light);
-    border-radius: 4px; padding: 2px 8px; margin-bottom: 12px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(77,157,224,0.1);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 14px;
   }
   .notes-text {
-    font-size: 15px; line-height: 1.75; color: #1f2937;
-    background: var(--bg-note); border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0; padding: 16px 20px;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--text);
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-left);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
   }
   .notes-text strong { color: var(--text); }
+  .notes-text em { font-style: italic; }
 
-  /* ── Print ── */
-  @media print {
-    body { font-size: 12pt; }
-    .cover { padding: 32px 40px 24px; }
-    .cover-title { font-size: 20pt; }
-    .slide-block { padding: 20px 40px; }
-    .timing-bar { margin: 20px 40px; }
-    .notes-text { font-size: 11pt; line-height: 1.6; }
-    .slide-title-text { font-size: 14pt; }
-    @page { margin: 1.5cm 2cm; }
+  @media (max-width: 600px) {
+    .cover, .slide-block { padding-left: 16px; padding-right: 16px; }
+    .timing-bar { padding: 0 16px; }
+    .slide-title-text { font-size: 16px; }
+    .notes-text { font-size: 15px; line-height: 1.75; }
   }
 
-  /* ── Mobile ── */
-  @media (max-width: 600px) {
-    .cover, .slide-block { padding-left: 20px; padding-right: 20px; }
-    .timing-bar { margin-left: 20px; margin-right: 20px; }
-    .cover-meta { flex-direction: column; gap: 8px; }
-    .timing-bar { display: none; }
+  @media print {
+    .sticky-nav { display: none; }
+    .slide-block { page-break-inside: avoid; }
+    body { font-size: 11pt; color: #000; background: #fff; }
+    .notes-text { font-size: 11pt; background: #f5f5f5; border-left: 3px solid #2563eb; }
+    @page { margin: 1.5cm 2cm; }
   }
 </style>
 </head>
 <body>
 
+<!-- Sticky jump nav -->
+<nav class="sticky-nav">
+  <span class="nav-label">Jump to</span>
+  <a class="nav-chip" href="#s1">1</a>
+  <a class="nav-chip" href="#s2">2</a>
+  <a class="nav-chip" href="#s3">3</a>
+  <a class="nav-chip" href="#s4">4</a>
+  <a class="nav-chip" href="#s5">5</a>
+  <a class="nav-chip" href="#s6">6</a>
+  <a class="nav-chip" href="#s7">7</a>
+  <a class="nav-chip" href="#s8">8</a>
+  <a class="nav-chip" href="#s9">9</a>
+  <a class="nav-chip" href="#s10">10</a>
+  <a class="nav-chip" href="#s11">11</a>
+  <a class="nav-chip" href="#s12">12</a>
+  <a class="nav-chip" href="#s13">13</a>
+  <a class="nav-chip" href="#s14">14</a>
+  <a class="nav-chip" href="#s15">15</a>
+  <a class="nav-chip" href="#s16">16</a>
+  <a class="nav-chip" href="#s17">17</a>
+  <button class="dark-toggle" onclick="document.body.classList.toggle('dark')" title="Toggle dark mode">&#9680;</button>
+</nav>
+
 <!-- Cover -->
 <div class="cover">
-  <div class="cover-tag">📋 Speaker Notes · onTarget 2026</div>
+  <div class="cover-tag">Speaker Notes &mdash; onTarget 2026</div>
   <div class="cover-title">From AI to Everyday Practice:<br>Operationalizing AI in Technical Writing</div>
   <div class="cover-meta">
-    <span>🎤 <strong>Yvonne Serota</strong> · Group Manager, Technical Writing · Palo Alto Networks</span>
-    <span>📅 October 15, 2026</span>
-    <span>⏱ ~30 min · 17 slides</span>
+    <span><strong>Yvonne Serota</strong> &middot; Group Manager, Technical Writing &middot; Palo Alto Networks</span>
+    <span>October 15, 2026</span>
+    <span>~30 min &middot; 17 slides</span>
   </div>
 </div>
 
 <!-- Timing overview -->
 <div class="timing-bar">
-  <div class="timing-cell"><div class="t-slide">1</div><div class="t-min">1 min</div></div>
-  <div class="timing-cell"><div class="t-slide">2</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">3</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">4</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">5</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">6</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">7</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">8</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">9</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">10</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">11</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">12</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">13</div><div class="t-min">1.5</div></div>
-  <div class="timing-cell"><div class="t-slide">14</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">15</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">16</div><div class="t-min">2</div></div>
-  <div class="timing-cell"><div class="t-slide">17</div><div class="t-min">1</div></div>
+  <div class="t-chip"><strong>1</strong>1 min</div>
+  <div class="t-chip"><strong>2</strong>1.5</div>
+  <div class="t-chip"><strong>3</strong>1.5</div>
+  <div class="t-chip"><strong>4</strong>1.5</div>
+  <div class="t-chip"><strong>5</strong>1.5</div>
+  <div class="t-chip"><strong>6</strong>2</div>
+  <div class="t-chip"><strong>7</strong>2</div>
+  <div class="t-chip"><strong>8</strong>1.5</div>
+  <div class="t-chip"><strong>9</strong>2</div>
+  <div class="t-chip"><strong>10</strong>1.5</div>
+  <div class="t-chip"><strong>11</strong>1.5</div>
+  <div class="t-chip"><strong>12</strong>1.5</div>
+  <div class="t-chip"><strong>13</strong>1.5</div>
+  <div class="t-chip"><strong>14</strong>2</div>
+  <div class="t-chip"><strong>15</strong>2</div>
+  <div class="t-chip"><strong>16</strong>2</div>
+  <div class="t-chip"><strong>17</strong>1</div>
 </div>
 
 <!-- Slide 1 -->
-<div class="slide-block">
+<div class="slide-block" id="s1">
   <div class="slide-header">
     <span class="slide-num">Slide 1</span>
     <span class="slide-section">Title</span>
   </div>
   <div class="slide-title-text">From AI to Everyday Practice: Operationalizing AI in Technical Writing</div>
-  <div class="timing-tag">⏱ ~1 min</div>
+  <div class="timing-tag">~1 min &mdash; Opening</div>
   <div class="notes-text">
-    Good [morning/afternoon], everyone. I'm Yvonne Serota — I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry.<br><br>
-    <strong>What I'm sharing today isn't a vision — it's what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.
+    Good [morning/afternoon], everyone. I&rsquo;m Yvonne Serota &mdash; I manage the Technical Writing team at Palo Alto Networks, where we cover identity security, PAM, cloud, and SaaS documentation across some of the most complex security products in the industry.<br><br>
+    <strong>What I&rsquo;m sharing today isn&rsquo;t a vision &mdash; it&rsquo;s what we actually built, how we built it, and what we learned along the way.</strong> Everything on these slides is in production today, used by my team every single day.
   </div>
 </div>
 
 <!-- Slide 2 -->
-<div class="slide-block">
+<div class="slide-block" id="s2">
   <div class="slide-header">
     <span class="slide-num">Slide 2</span>
     <span class="slide-section">Context</span>
   </div>
   <div class="slide-title-text">The Palo Alto Networks TW Team</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Context</div>
   <div class="notes-text">
-    Let me set the scene. 20+ writers, four major repos — Monorepo, EPM, PAM-SH, and Conjur — dozens of product lines, globally distributed team. The quote there is <strong>real</strong> — from a writer on my team — and it captures the core problem: most of the job was finding context, not writing content.<br><br>
-    Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity — every conversation was based on gut feel, not numbers.
+    Let me set the scene. 20+ writers across four major repos &mdash; Monorepo, EPM, PAM-SH, and Conjur &mdash; dozens of product lines, globally distributed team. The quote on this slide is <strong>real</strong> &mdash; from a writer on my team &mdash; and it captures the core problem: most of the job was finding context, not writing content.<br><br>
+    Our baseline was <strong>12 days average cycle time</strong> from ticket creation to published doc. And we had zero data to show leadership why we needed more capacity &mdash; every conversation was based on gut feel, not numbers.
   </div>
 </div>
 
 <!-- Slide 3 -->
-<div class="slide-block">
+<div class="slide-block" id="s3">
   <div class="slide-header">
     <span class="slide-num">Slide 3</span>
     <span class="slide-section">The Problem</span>
   </div>
   <div class="slide-title-text">The Documentation Pain Points</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; The Problem</div>
   <div class="notes-text">
-    Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real — I could give you specific stories for every one.<br><br>
-    <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page — often days after R&amp;D had already moved on. And 'no measurement' — we were making resourcing decisions with zero data. That has to change before anything else can.
+    Before we touch AI, I want to be honest about how broken the manual process was. These six pain points are real &mdash; I could give you specific stories for every one.<br><br>
+    <strong>Discovery was the biggest time sink</strong>: scheduling SME calls, chasing Figma links, finding the right Confluence page &mdash; often days after R&amp;D had already moved on.<br><br>
+    And &ldquo;no measurement&rdquo; &mdash; we were making resourcing decisions with zero data. That has to change before anything else can.
   </div>
 </div>
 
 <!-- Slide 4 -->
-<div class="slide-block">
+<div class="slide-block" id="s4">
   <div class="slide-header">
     <span class="slide-num">Slide 4</span>
     <span class="slide-section">Our Organization</span>
   </div>
   <div class="slide-title-text">Two Pillars: SOH &amp; Writing Pods</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Organization</div>
   <div class="notes-text">
-    So how did we structure ourselves to solve this? We split into two pillars. The Standards &amp; Operations Hub owns tooling, infrastructure, and AI platform — led by Vita Gilin. Delivery Writing Pods are the execution layer.<br><br>
-    <strong>The critical insight</strong>: you can't build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential — and not obvious to us at first.
+    So how did we structure ourselves to solve this? We split into two pillars. The Standards &amp; Operations Hub owns tooling, the MkDocs platform, and the AI pipeline &mdash; led by Vita Gilin. Delivery Writing Pods are the execution layer.<br><br>
+    <strong>The critical insight</strong>: you can&rsquo;t build the AI pipeline AND use it at the same time with the same people. SOH builds and governs. Pods consume and deliver. Separating these roles was essential &mdash; and not obvious to us at first.
   </div>
 </div>
 
-
 <!-- Slide 5 -->
-<div class="slide-block">
+<div class="slide-block" id="s5">
   <div class="slide-header">
     <span class="slide-num">Slide 5</span>
     <span class="slide-section">The Approach</span>
   </div>
   <div class="slide-title-text">How We Got Here</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Journey</div>
   <div class="notes-text">
-    I want to give you the origin story, because context matters. We didn't start with a grand plan &mdash; we started exactly where most of you probably are: experimenting with prompts.<br><br>
-    In <strong>October 2023</strong>, leadership asked us: <em>"What is your vision for how AI will transform your work?"</em> That question launched everything. We explored ChatGPT and Copilot for basic editing and content improvement.<br><br>
+    I want to give you the origin story, because context matters. We didn&rsquo;t start with a grand plan &mdash; we started exactly where most of you probably are: experimenting with prompts.<br><br>
+    In <strong>October 2023</strong>, leadership asked us: <em>&ldquo;What is your vision for how AI will transform your work?&rdquo;</em> That question launched everything. We explored ChatGPT and Copilot for basic editing and content improvement.<br><br>
     Fast forward to <strong>2025</strong> &mdash; we entered a company hackathon with one ambitious idea: orchestrated agents that collect R&amp;D artifacts and generate documentation end-to-end. We built it, submitted it, and it became our blueprint.<br><br>
     From there we refactored it into a <strong>production-grade system embedded in the R&amp;D ADLC</strong> &mdash; automatically triggered by Jira ticket status and codebase changes. No longer a demo. A daily workflow.<br><br>
-    That's the arc: from "let's try a prompt" to a fully operational agentic pipeline.
+    That&rsquo;s the arc: from &ldquo;let&rsquo;s try a prompt&rdquo; to a fully operational agentic pipeline.
   </div>
 </div>
 
-
 <!-- Slide 6 -->
-<div class="slide-block">
+<div class="slide-block" id="s6">
   <div class="slide-header">
     <span class="slide-num">Slide 6</span>
     <span class="slide-section">The Platform</span>
   </div>
   <div class="slide-title-text">Why We Chose Cursor as Our AI IDE</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Platform</div>
   <div class="notes-text">
-    We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP — the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run.<br><br>
-    <strong>The Flare → MkDocs migration was the infrastructure prerequisite</strong> — Markdown is agent-readable. We couldn't have built any of this on binary Flare files.
+    We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP &mdash; the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run.<br><br>
+    <strong>The Flare &rarr; MkDocs migration was the infrastructure prerequisite</strong> &mdash; Markdown is agent-readable. We couldn&rsquo;t have built any of this on binary Flare files.
   </div>
 </div>
 
 <!-- Slide 7 -->
-<div class="slide-block">
+<div class="slide-block" id="s7">
   <div class="slide-header">
     <span class="slide-num">Slide 7</span>
     <span class="slide-section">The Skills</span>
   </div>
   <div class="slide-title-text">The Skills Library We Built</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Skills</div>
   <div class="notes-text">
-    Let me walk through the library. The biggest change since we last shared any of this: Ben Skelker refactored TW Feature Doc into two specialized skills — <strong>TW Doc Write</strong> for creating and updating docs from source material, and <strong>TW Doc Review</strong> for assessing existing pages in a fresh session. The split matters: a reviewer that knows why every sentence is there is the wrong reviewer.<br><br>
+    Let me walk through the library. The biggest change since we last shared any of this: Ben Skelker refactored TW Feature Doc into two specialized skills &mdash; <strong>TW Doc Write</strong> for creating and updating docs from source material, and <strong>TW Doc Review</strong> for assessing existing pages in a fresh session. The split matters: a reviewer that knows why every sentence is there is the wrong reviewer.<br><br>
     Open PR handles the editorial pass and PR creation. DCI Pipeline is our team health measurement system. Day Manager synthesizes my email, calendar, and Jira every morning. Two in development: automated PR review and UI path validation.<br><br>
-    <strong>The design principle across all of them</strong>: each skill knows exactly where to find context, what to do with it, how to validate the output, and when to hand off to a human. That's the difference between a skill and a prompt.
+    <strong>The design principle across all of them</strong>: each skill knows exactly where to find context, what to do with it, how to validate the output, and when to hand off to a human. That&rsquo;s the difference between a skill and a prompt.
   </div>
 </div>
 
 <!-- Slide 8 -->
-<div class="slide-block">
+<div class="slide-block" id="s8">
   <div class="slide-header">
     <span class="slide-num">Slide 8</span>
     <span class="slide-section">The Lifecycle</span>
   </div>
   <div class="slide-title-text">AI Embedded in Every Phase</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; ADLC</div>
   <div class="notes-text">
-    The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>.<br><br>
-    <strong>TW Doc Write</strong> covers Discovery + Authoring — phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices.<br><br>
-    Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters.
+    The ADLC &mdash; AI-augmented Documentation Lifecycle. Key point: AI isn&rsquo;t bolted on at the end. It&rsquo;s embedded in <strong>every phase</strong>.<br><br>
+    <strong>TW Doc Write</strong> covers Discovery + Authoring &mdash; phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices.<br><br>
+    Human writers are deliberately in the loop at the judgment gates &mdash; reviewing context quality after discovery, approving the final merge. <strong>The orange &ldquo;Human&rdquo; blocks are there by design</strong> &mdash; not because we couldn&rsquo;t automate them, because those are the moments where domain expertise matters.
   </div>
 </div>
 
 <!-- Slide 9 -->
-<div class="slide-block">
+<div class="slide-block" id="s9">
   <div class="slide-header">
     <span class="slide-num">Slide 9</span>
     <span class="slide-section">Deep Dive</span>
   </div>
   <div class="slide-title-text">Write, Refine, Review: Three Roles, Two Skills</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Deep Dive</div>
   <div class="notes-text">
     Let me show you the two-skill workflow in detail. <strong>TW Doc Write</strong>: writer types one command, agent gathers all context via MCP, pins the style guide, writes the complete Markdown draft. Writer reviews and refines.<br><br>
-    Then — and this is new — the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness.<br><br>
+    Then &mdash; and this is new &mdash; the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness.<br><br>
     <strong>Discovery + draft: under 30 minutes. Quality review: minutes, not a review cycle.</strong>
   </div>
 </div>
 
 <!-- Slide 10 -->
-<div class="slide-block">
+<div class="slide-block" id="s10">
   <div class="slide-header">
     <span class="slide-num">Slide 10</span>
     <span class="slide-section">Broader Impact</span>
   </div>
   <div class="slide-title-text">AI Across the Whole TW Operation</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Broader Impact</div>
   <div class="notes-text">
-    Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command.<br><br>
+    Once you&rsquo;ve built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command.<br><br>
     The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.
   </div>
 </div>
 
 <!-- Slide 11 -->
-<div class="slide-block">
+<div class="slide-block" id="s11">
   <div class="slide-header">
     <span class="slide-num">Slide 11</span>
     <span class="slide-section">Content Quality</span>
   </div>
   <div class="slide-title-text">The Documentation Health Initiative</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Doc Health</div>
   <div class="notes-text">
-    Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50.<br><br>
+    Parallel to authoring, we built a documentation health initiative. Topics catalogued across our product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> &mdash; so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50.<br><br>
     The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.
   </div>
 </div>
 
 <!-- Slide 12 -->
-<div class="slide-block">
+<div class="slide-block" id="s12">
   <div class="slide-header">
     <span class="slide-num">Slide 12</span>
     <span class="slide-section">Day in the Life</span>
   </div>
   <div class="slide-title-text">A Day in the Life: Before &amp; After</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Day in the Life</div>
   <div class="notes-text">
     I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week.<br><br>
-    Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>
+    Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining &mdash; not formatting</strong>, end of day one command to open the PR.<br><br>
+    <strong>The job changed from production worker to content architect.</strong>
   </div>
 </div>
 
 <!-- Slide 13 -->
-<div class="slide-block">
+<div class="slide-block" id="s13">
   <div class="slide-header">
     <span class="slide-num">Slide 13</span>
     <span class="slide-section">Impact</span>
   </div>
   <div class="slide-title-text">The Numbers</div>
-  <div class="timing-tag">⏱ ~1.5 min</div>
+  <div class="timing-tag">~1.5 min &mdash; Numbers</div>
   <div class="notes-text">
-    Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>10 skills in the library, 8 live</strong> — that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80–0.95 is the sustainability zone.<br><br>
-    The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.
+    Here&rsquo;s where we are in numbers. Tracking toward &lt;3 days vs the 12-day baseline. <strong>10 skills in the library, 8 live</strong> &mdash; that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80&ndash;0.95 is the sustainability zone: enough demand to keep the team engaged, not so much that we&rsquo;re constantly overloaded.<br><br>
+    The non-obvious win: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> &mdash; with a chart, not a feeling.
   </div>
 </div>
 
 <!-- Slide 14 -->
-<div class="slide-block">
+<div class="slide-block" id="s14">
   <div class="slide-header">
     <span class="slide-num">Slide 14</span>
     <span class="slide-section">Role Evolution</span>
   </div>
   <div class="slide-title-text">From Technical Writer to Content Architect</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Role Evolution</div>
   <div class="notes-text">
-    <strong>This is the most important slide. The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow.<br><br>
-    The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.
+    <strong>This is the most important slide. The job doesn&rsquo;t disappear &mdash; it elevates.</strong> Look at what&rsquo;s crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow.<br><br>
+    The new job description at the bottom is what I give to candidates now: <em>&ldquo;The Content Architect decides what to say, how to structure it, and whether the agent got it right. They&rsquo;re the person who knows the user well enough to catch what the agent misses.&rdquo;</em><br><br>
+    That&rsquo;s a higher-value job.
   </div>
 </div>
 
 <!-- Slide 15 -->
-<div class="slide-block">
+<div class="slide-block" id="s15">
   <div class="slide-header">
     <span class="slide-num">Slide 15</span>
     <span class="slide-section">What We Learned</span>
   </div>
   <div class="slide-title-text">Lessons Learned</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Lessons</div>
   <div class="notes-text">
     Six real lessons from 18 months.<br><br>
-    <strong>Infrastructure first</strong> — the Flare migration was painful and essential.<br>
+    <strong>Infrastructure first</strong> &mdash; the Flare migration was painful and essential.<br>
     <strong>Start with one skill</strong> and make it excellent before expanding.<br>
-    <strong>Connect your tools first</strong> — without MCP, the agent is blind.<br>
-    <strong>Keep the human in the loop</strong> deliberately — the feedback loop is how skills improve over time.<br>
-    <strong>Measure before you optimize</strong> — we didn't know our cycle time was 12 days until we measured it.<br>
-    And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don't.
+    <strong>Connect your tools first</strong> &mdash; without MCP, the agent is blind.<br>
+    <strong>Keep the human in the loop</strong> deliberately &mdash; the feedback loop is how skills improve over time.<br>
+    <strong>Measure before you optimize</strong> &mdash; we didn&rsquo;t know our cycle time was 12 days until we measured it.<br>
+    And: <strong>your team IS the AI strategy</strong>. Tools commoditize. People who know how to use them don&rsquo;t.
   </div>
 </div>
 
 <!-- Slide 16 -->
-<div class="slide-block">
+<div class="slide-block" id="s16">
   <div class="slide-header">
     <span class="slide-num">Slide 16</span>
     <span class="slide-section">For You</span>
   </div>
   <div class="slide-title-text">What You Can Take Home Today</div>
-  <div class="timing-tag">⏱ ~2 min</div>
+  <div class="timing-tag">~2 min &mdash; Takeaways</div>
   <div class="notes-text">
     Five things to take home. [Walk through each.]<br><br>
-    <strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake: building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can't.<br><br>
+    <strong>Emphasize #3 most strongly</strong>: connect your tools before you build features. The single most common mistake is building sophisticated AI automations before giving the AI any data to work with. An agent that can see your Jira, Confluence, and GitHub is categorically more capable than one that can&rsquo;t.<br><br>
     <strong>MCP connectivity is the prerequisite, not the afterthought.</strong>
   </div>
 </div>
 
 <!-- Slide 17 -->
-<div class="slide-block">
+<div class="slide-block" id="s17">
   <div class="slide-header">
     <span class="slide-num">Slide 17</span>
     <span class="slide-section">Thank You</span>
   </div>
   <div class="slide-title-text">Thank You</div>
-  <div class="timing-tag">⏱ ~1 min</div>
+  <div class="timing-tag">~1 min &mdash; Closing</div>
   <div class="notes-text">
-    Thank you. Happy to go deeper on any of this — the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership.<br><br>
-    Come find me, or reach out via the Skills library repo — it's linked on screen. [Open for questions]
+    Thank you. Happy to go deeper on any of this &mdash; the MCP infrastructure decisions, specific skill implementations, how we handle human-AI handoffs, or how to build the business case with leadership.<br><br>
+    Come find me, or reach out via the Skills library repo &mdash; it&rsquo;s linked on screen. [Open for questions]
   </div>
 </div>
 
