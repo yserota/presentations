@@ -375,8 +375,8 @@
   <div class="slide-title-text">Why We Chose Cursor as Our AI IDE</div>
   <div class="timing-tag">~2 min &mdash; Platform</div>
   <div class="notes-text">
-    We chose Cursor for three reasons: agent mode for multi-step autonomous task execution, the skill file system for team-shared versioned workflows, and <strong>MCP &mdash; the Model Context Protocol</strong>. MCP is the secret. It connects Cursor to any tool through a policy-controlled broker. One agent can read a Jira ticket, pull the HLD from Confluence, fetch Figma screens, and clone the GitHub branch in a single run.<br><br>
-    <strong>The Flare &rarr; MkDocs migration was the infrastructure prerequisite</strong> &mdash; Markdown is agent-readable. We couldn&rsquo;t have built any of this on binary Flare files.
+    We evaluated a few tools. We picked Cursor because it&rsquo;s built around an agent that takes multi-step actions &mdash; not just responds to a prompt. That distinction matters.<br><br>Two things made it the right call: <strong>Skills</strong> &mdash; reusable, versioned workflow files the whole team shares. And <strong>MCP</strong> &mdash; the Model Context Protocol, which connects Cursor to everything else. One agent, one run: Jira ticket, Confluence HLD, Figma screens, GitHub branch. No copy-pasting context.<br><br>
+    One prerequisite we&rsquo;re still working through: the <strong>Flare &rarr; MkDocs migration</strong>. Markdown is agent-readable &mdash; binary Flare files aren&rsquo;t. We&rsquo;re on track to complete it by end of year.
   </div>
 </div>
 
