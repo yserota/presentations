@@ -1024,34 +1024,34 @@
       <div style="display:flex;flex-direction:column;gap:14px">
         <div class="stat-strip">
           <div class="stat-item">
-            <div class="stat-value accent">978</div>
-            <div class="stat-label">Topics catalogued<br><span style="color:var(--text-dimmer)">10 product spaces</span></div>
+            <div class="stat-value accent">3,668</div>
+            <div class="stat-label">Topics catalogued<br><span style="color:var(--text-dimmer)">13 product spaces</span></div>
           </div>
           <div class="stat-item">
-            <div class="stat-value green">429</div>
+            <div class="stat-value green">44</div>
             <div class="stat-label">Topics scored<br><span style="color:var(--text-dimmer)">traffic-weighted</span></div>
           </div>
           <div class="stat-item">
-            <div class="stat-value warm">3</div>
-            <div class="stat-label">Issue types<br><span style="color:var(--text-dimmer)">major · minor · structural</span></div>
+            <div class="stat-value warm">11</div>
+            <div class="stat-label">RED topics<br><span style="color:var(--text-dimmer)">critical &mdash; fix first</span></div>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-          <div style="background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.3);border-radius:8px;padding:14px;text-align:center">
-            <div style="font-size:22px;font-weight:800;color:#e05252">RED</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Critical issues + high traffic &mdash; fix first</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+          <div style="background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:20px;font-weight:800;color:#e05252">11 RED</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Critical issues &mdash; fix first</div>
           </div>
-          <div style="background:rgba(212,164,75,0.08);border:1px solid rgba(212,164,75,0.3);border-radius:8px;padding:14px;text-align:center">
-            <div style="font-size:22px;font-weight:800;color:var(--yellow)">YELLOW</div>
+          <div style="background:rgba(212,120,50,0.08);border:1px solid rgba(212,120,50,0.3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:20px;font-weight:800;color:#d47832">12 ORANGE</div>
+            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Significant issues</div>
+          </div>
+          <div style="background:rgba(212,164,75,0.08);border:1px solid rgba(212,164,75,0.3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:20px;font-weight:800;color:var(--yellow)">21 YELLOW</div>
             <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Minor issues or lower traffic</div>
           </div>
-          <div style="background:rgba(60,185,124,0.08);border:1px solid rgba(60,185,124,0.3);border-radius:8px;padding:14px;text-align:center">
-            <div style="font-size:22px;font-weight:800;color:var(--green)">GREEN</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Meets quality bar &mdash; no action needed</div>
-          </div>
-        </div>
-
+          <div style="background:rgba(60,185,124,0.08);border:1px solid rgba(60,185,124,0.3);border-radius:8px;padding:12px;text-align:center">
+            <div style="font-size:20px;font-weight:800;color:var(--green)">GREEN</div>
         <div class="card" style="background:rgba(60,185,124,0.05);border-color:rgba(60,185,124,0.3)">
           <h3 style="color:var(--green)">Why This Matters</h3>
           <p style="font-size:12.5px;color:var(--text-dim);line-height:1.6">The DCI tells you if the <strong style="color:#fff">team</strong> is healthy. Doc health tells you if the <strong style="color:#fff">content</strong> is healthy. Together, they give you the first complete picture of documentation quality at scale &mdash; driven by data, not editorial instinct.</p>
@@ -1288,7 +1288,7 @@
     8: `<em>~1.5 min · ADLC</em><br>The ADLC — AI-augmented Documentation Lifecycle. Key point: AI isn't bolted on at the end. It's embedded in <strong>every phase</strong>. <strong>TW Doc Write</strong> covers Discovery + Authoring — phases III and IV. <strong>TW Doc Review</strong> is now live in phase V Validation, running in a fresh session so the reviewer has no memory of the authoring choices. Human writers are deliberately in the loop at the judgment gates — reviewing context quality after discovery, approving the final merge. <strong>The orange "Human" blocks are there by design</strong> — not because we couldn't automate them, because those are the moments where domain expertise matters.`,
     9: `<em>~2 min · Deep Dive</em><br>Let me show you the two-skill workflow in detail. <strong>TW Doc Write</strong>: writer types one command, agent gathers all context via MCP, pins the style guide, writes the complete Markdown draft. Writer reviews and refines. Then — and this is new — the writer opens a <em>fresh session</em> and invokes <strong>TW Doc Review</strong>. Fresh session is deliberate: a reviewer that knows why every sentence is there is the wrong reviewer. The review agent checks style guide conformance, technical accuracy, source coverage, and completeness. <strong>Discovery + draft: under 30 minutes. Quality review: minutes, not a review cycle.</strong>`,
     10: `<em>~1.5 min · Broader Impact</em><br>Once you've built the infrastructure, the same agent capabilities apply to every part of how a TW team operates. I want to highlight <strong>QBR prep</strong> specifically: before every quarterly review with leadership, the agent now auto-builds a full slide deck from live Jira and dashboard data. That used to take me half a day. Now it takes one command. The point is: tool connectivity is a platform, not a feature. Once MCP is wired up, the use cases multiply fast.`,
-    11: `<em>~1.5 min · Doc Health</em><br>Parallel to authoring, we built a documentation health initiative. 978 topics catalogued across 10 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> — so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50. The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.`,
+    11: `<em>~1.5 min · Doc Health</em><br>Parallel to authoring, we built a documentation health initiative. <strong>3,668 topics catalogued</strong> across 13 product spaces. Every topic scored against quality criteria, then <strong>traffic-weighted with Adobe Analytics</strong> - so a RED topic with 5,000 monthly pageviews gets priority over a RED topic with 50. We've scored 44 topics so far: 11 RED, 12 ORANGE, 21 YELLOW. The agent generates a continuously updated prioritized remediation queue. This is how you manage content quality at scale without a manual audit team.`,
     12: `<em>~1.5 min · Day in the Life</em><br>I want to make this tangible. Left column: morning chasing context via emails and Slack, a 30-min SME call to learn things already written in design docs nobody shared, afternoon drafting from scratch, end of day following up on a PR open for a week. Right column: Day Manager surfaces three priorities, agent generates draft in 30 min, afternoon <strong>reviewing and refining — not formatting</strong>, end of day one command to open the PR. <strong>The job changed from production worker to content architect.</strong>`,
     13: `<em>~1.5 min · Numbers</em><br>Here's where we are in numbers. ≤3 days vs 12-day baseline — we're tracking toward that. <strong>10 skills in the library, 8 live</strong> — that includes the new TW Doc Write and TW Doc Review that Ben Skelker shipped. DCI target range 0.80–0.95 is the sustainability zone: enough demand to keep the team engaged, not so much that we're constantly overloaded. The non-obvious win at bottom right: <strong>the DCI pipeline gave us the data to have a different conversation with leadership about resourcing</strong> — with a chart, not a feeling.`,
     14: `<em>~2 min · Role Evolution</em><br>This is the most important slide. <strong>The job doesn't disappear — it elevates.</strong> Look at what's crossing out: drafting from scratch, chasing context, ad-hoc unmeasured AI use. Look at what replaces it: reviewing agent drafts, making information architecture decisions, working in a fully measured workflow. The new job description at the bottom is what I give to candidates now: <em>"The Content Architect decides what to say, how to structure it, and whether the agent got it right. They're the person who knows the user well enough to catch what the agent misses."</em> That's a higher-value job.`,
