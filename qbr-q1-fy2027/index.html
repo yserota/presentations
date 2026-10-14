@@ -30,6 +30,10 @@
     }
     #nav button:hover:not(:disabled) { background: #353852; }
     #nav button:disabled { opacity: 0.35; cursor: default; }
+    #timer { font-size: 12px; color: #6b7280; cursor: pointer; min-width: 46px; text-align: center; user-select: none; font-variant-numeric: tabular-nums; }
+    #timer.running { color: #4ade80; }
+    #timer.warn    { color: #fbbf24; }
+    #timer.over    { color: #f87171; }
 
     #progress-bar {
       position: fixed; top: 44px; left: 0; height: 3px;
@@ -205,6 +209,8 @@
   <span class="counter" id="counter">1 / 11</span>
   <button id="btn-prev" onclick="go(-1)" disabled>&#8592; Prev</button>
   <button id="btn-next" onclick="go(1)">Next &#8594;</button>
+  <span style="width:1px;height:16px;background:#2e3244;margin:0 4px;display:inline-block"></span>
+  <span id="timer" onclick="toggleTimer()" title="Click to start/stop &middot; Double-click to reset &middot; T key">0:00</span>
 </div>
 <div id="progress-bar" style="width:9.09%"></div>
 
@@ -532,6 +538,39 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+    if (e.key === 't' || e.key === 'T') toggleTimer();
+  });
+
+  // ── Timer ───────────────────────────────────────────────────────────────────
+  let timerStart = null, timerInterval = null, timerRunning = false, timerElapsed = 0;
+  function toggleTimer() {
+    const el = document.getElementById('timer');
+    if (timerRunning) {
+      clearInterval(timerInterval); timerRunning = false;
+      timerElapsed = Math.floor((Date.now() - timerStart) / 1000);
+      el.classList.remove('running');
+    } else {
+      timerStart = Date.now() - timerElapsed * 1000;
+      timerInterval = setInterval(updateTimer, 500);
+      timerRunning = true; el.classList.add('running');
+    }
+  }
+  function resetTimer() {
+    clearInterval(timerInterval); timerRunning = false; timerElapsed = 0; timerStart = null;
+    const el = document.getElementById('timer');
+    el.textContent = '0:00'; el.classList.remove('running', 'warn', 'over');
+  }
+  function updateTimer() {
+    const s = Math.floor((Date.now() - timerStart) / 1000);
+    const m = Math.floor(s / 60);
+    const el = document.getElementById('timer');
+    el.textContent = m + ':' + String(s % 60).padStart(2, '0');
+    el.classList.remove('warn', 'over');
+    if (s >= 900) el.classList.add('over');       // red at 15 min
+    else if (s >= 720) el.classList.add('warn');  // amber at 12 min
+  }
+  document.getElementById('timer').addEventListener('dblclick', function(e) {
+    e.stopPropagation(); resetTimer();
   });
 
   updateProgress(0);
