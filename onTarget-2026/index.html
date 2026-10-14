@@ -989,91 +989,96 @@
   <!-- ════════════════════════════════════════ -->
   <!-- SLIDE 11 · Doc Health Initiative         -->
   <!-- ════════════════════════════════════════ -->
-  <div class="slide" id="s11">
-    <div class="section-label">Content Quality</div>
-    <div class="eyebrow">Beyond Writing New Docs</div>
-    <div class="slide-title">The Documentation Health Initiative</div>
-    <div class="divider"></div>
-    <div class="grid-2" style="flex:1;gap:20px">
+ <div class="slide" id="s11">
+   <div class="section-label">Content Quality</div>
+   <div class="eyebrow">Beyond Writing New Docs</div>
+   <div class="slide-title">The Documentation Health Initiative</div>
+   <div class="divider"></div>
 
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="card" style="padding:13px 16px">
-          <h3>How It Works</h3>
-          <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
-            <div class="step-row" style="padding:6px 11px">
-              <div class="step-num">1</div>
-              <div>
-                <div class="step-who agent">Agent: Analyze</div>
-                <div class="step-desc">AI reviews each topic for major, minor, and structural issues against style standards and content completeness criteria.</div>
-              </div>
-            </div>
-            <div class="step-row" style="padding:6px 11px">
-              <div class="step-num">2</div>
-              <div>
-                <div class="step-who agent">Agent: Score &amp; Prioritize</div>
-                <div class="step-desc">Traffic data (Adobe Analytics) is applied to weight scores. High-traffic RED topics rise to the top of the remediation queue automatically.</div>
-              </div>
-            </div>
-            <div class="step-row" style="padding:6px 11px">
-              <div class="step-num">3</div>
-              <div>
-                <div class="step-who agent">Agent: Recommend Fixes &amp; Open PR</div>
-                <div class="step-desc">Runs the doc-fix skill on the top-priority topic, applies the changes, and opens a PR for writer review.</div>
-              </div>
-            </div>
-            <div class="step-row" style="padding:6px 11px">
-              <div class="step-num">4</div>
-              <div>
-                <div class="step-who human">Writer: Review PR &amp; Handle Manual Tasks</div>
-                <div class="step-desc">Reviews the agent&rsquo;s edits, approves or refines, and handles any changes that require human judgment.</div>
-              </div>
-            </div>
-        </div>
-      </div>
+   <!-- Full-width stat strip -->
+   <div class="stat-strip" style="margin-bottom:16px">
+     <div class="stat-item" style="padding:10px 18px">
+       <div class="stat-value accent">3,668</div>
+       <div class="stat-label">Topics catalogued<br><span style="color:var(--text-dimmer)">13 product spaces</span></div>
+     </div>
+     <div class="stat-item" style="padding:10px 18px">
+       <div class="stat-value green">44</div>
+       <div class="stat-label">Topics scored<br><span style="color:var(--text-dimmer)">traffic-weighted</span></div>
+     </div>
+     <div class="stat-item" style="padding:10px 18px">
+       <div class="stat-value warm">11</div>
+       <div class="stat-label">RED topics<br><span style="color:var(--text-dimmer)">critical &mdash; fix first</span></div>
+     </div>
+   </div>
 
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="stat-strip" style="border-radius:8px">
-          <div class="stat-item" style="padding:10px 14px">
-            <div class="stat-value accent">3,668</div>
-            <div class="stat-label">Topics catalogued<br><span style="color:var(--text-dimmer)">13 product spaces</span></div>
-          </div>
-          <div class="stat-item" style="padding:10px 14px">
-            <div class="stat-value green">44</div>
-            <div class="stat-label">Topics scored<br><span style="color:var(--text-dimmer)">traffic-weighted</span></div>
-          </div>
-          <div class="stat-item" style="padding:10px 14px">
-            <div class="stat-value warm">11</div>
-            <div class="stat-label">RED topics<br><span style="color:var(--text-dimmer)">critical &mdash; fix first</span></div>
-          </div>
-        </div>
+   <div class="grid-2" style="flex:1;gap:20px">
 
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px">
-          <div style="background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.3);border-radius:8px;padding:8px 10px;text-align:center">
-            <div style="font-size:20px;font-weight:800;color:#e05252">11 RED</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Critical issues &mdash; fix first</div>
-          </div>
-          <div style="background:rgba(212,120,50,0.08);border:1px solid rgba(212,120,50,0.3);border-radius:8px;padding:8px 10px;text-align:center">
-            <div style="font-size:20px;font-weight:800;color:#d47832">12 ORANGE</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Significant issues</div>
-          </div>
-          <div style="background:rgba(212,164,75,0.08);border:1px solid rgba(212,164,75,0.3);border-radius:8px;padding:8px 10px;text-align:center">
-            <div style="font-size:20px;font-weight:800;color:var(--yellow)">21 YELLOW</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Minor issues or lower traffic</div>
-          </div>
-          <div style="background:rgba(60,185,124,0.08);border:1px solid rgba(60,185,124,0.3);border-radius:8px;padding:8px 10px;text-align:center">
-            <div style="font-size:20px;font-weight:800;color:var(--green)">GREEN</div>
-            <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Meets quality bar</div>
-          </div>
-        </div>
+     <!-- Left: How It Works -->
+     <div>
+       <div class="card" style="padding:13px 16px;height:100%">
+         <h3>How It Works</h3>
+         <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+           <div class="step-row" style="padding:6px 11px">
+             <div class="step-num">1</div>
+             <div>
+               <div class="step-who agent">Agent: Analyze</div>
+               <div class="step-desc">AI reviews each topic for major, minor, and structural issues against style standards and content completeness criteria.</div>
+             </div>
+           </div>
+           <div class="step-row" style="padding:6px 11px">
+             <div class="step-num">2</div>
+             <div>
+               <div class="step-who agent">Agent: Score &amp; Prioritize</div>
+               <div class="step-desc">Traffic data (Adobe Analytics) is applied to weight scores. High-traffic RED topics rise to the top of the remediation queue automatically.</div>
+             </div>
+           </div>
+           <div class="step-row" style="padding:6px 11px">
+             <div class="step-num">3</div>
+             <div>
+               <div class="step-who agent">Agent: Recommend Fixes &amp; Open PR</div>
+               <div class="step-desc">Runs the doc-fix skill on the top-priority topic, applies the changes, and opens a PR for writer review.</div>
+             </div>
+           </div>
+           <div class="step-row" style="padding:6px 11px">
+             <div class="step-num">4</div>
+             <div>
+               <div class="step-who human">Writer: Review PR &amp; Handle Manual Tasks</div>
+               <div class="step-desc">Reviews the agent&rsquo;s edits, approves or refines, and handles any changes that require human judgment.</div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
 
-        <div class="card" style="padding:12px 16px" style="background:rgba(60,185,124,0.05);border-color:rgba(60,185,124,0.3)">
-          <h3 style="color:var(--green)">Why This Matters</h3>
-          <p style="font-size:12px;color:var(--text-dim);line-height:1.5">The DCI tells you if the <strong style="color:#fff">team</strong> is healthy. Doc health tells you if the <strong style="color:#fff">content</strong> is healthy. Together, they give you the first complete picture of documentation quality at scale &mdash; driven by data, not editorial instinct.</p>
-        </div>
-      </div>
+     <!-- Right: Tier grid + Why This Matters -->
+     <div style="display:flex;flex-direction:column;gap:12px">
+       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+         <div style="background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.3);border-radius:8px;padding:10px;text-align:center">
+           <div style="font-size:20px;font-weight:800;color:#e05252">11 RED</div>
+           <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Critical issues &mdash; fix first</div>
+         </div>
+         <div style="background:rgba(212,120,50,0.08);border:1px solid rgba(212,120,50,0.3);border-radius:8px;padding:10px;text-align:center">
+           <div style="font-size:20px;font-weight:800;color:#d47832">12 ORANGE</div>
+           <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Significant issues</div>
+         </div>
+         <div style="background:rgba(212,164,75,0.08);border:1px solid rgba(212,164,75,0.3);border-radius:8px;padding:10px;text-align:center">
+           <div style="font-size:20px;font-weight:800;color:var(--yellow)">21 YELLOW</div>
+           <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Minor issues or lower traffic</div>
+         </div>
+         <div style="background:rgba(60,185,124,0.08);border:1px solid rgba(60,185,124,0.3);border-radius:8px;padding:10px;text-align:center">
+           <div style="font-size:20px;font-weight:800;color:var(--green)">GREEN</div>
+           <div style="font-size:10px;color:var(--text-dim);margin-top:4px;line-height:1.4">Meets quality bar</div>
+         </div>
+       </div>
 
-    </div>
-  </div>
+       <div class="card" style="background:rgba(60,185,124,0.05);border-color:rgba(60,185,124,0.3);padding:14px 16px;flex:1">
+         <h3 style="color:var(--green)">Why This Matters</h3>
+         <p style="font-size:12px;color:var(--text-dim);line-height:1.5;margin-top:6px">The DCI tells you if the <strong style="color:#fff">team</strong> is healthy. Doc health tells you if the <strong style="color:#fff">content</strong> is healthy. Together, they give you the first complete picture of documentation quality at scale &mdash; driven by data, not editorial instinct.</p>
+       </div>
+     </div>
+
+   </div>
+ </div>
   <!-- ════════════════════════════════════════ -->
   <!-- SLIDE 12 · Role Evolution                -->
   <!-- ════════════════════════════════════════ -->
