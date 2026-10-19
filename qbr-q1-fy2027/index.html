@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
     }
     #deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
 
-    /* ── Nav ── */
+    /* â”€â”€ Nav â”€â”€ */
     #nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: 44px; background: #1a1d27; border-bottom: 1px solid #2e3244;
@@ -44,7 +44,7 @@
     .dot { width: 6px; height: 6px; border-radius: 50%; background: #3d4158; cursor: pointer; transition: background 0.2s, transform 0.2s; }
     .dot.active { background: #5b7cf6; transform: scale(1.3); }
 
-    /* ── Slide base ── */
+    /* â”€â”€ Slide base â”€â”€ */
     .slide {
       position: absolute; top: 47px; left: 0; right: 0; bottom: 0;
       padding: 40px 64px 32px; overflow-y: auto; display: none;
@@ -65,14 +65,14 @@
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ── Type ── */
+    /* â”€â”€ Type â”€â”€ */
     h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: #f0f2fb; margin-bottom: 6px; }
     h2 { font-size: 18px; font-weight: 700; color: #f0f2fb; margin-bottom: 6px; }
     h3 { font-size: 12px; font-weight: 600; color: #c9cdd8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
     .subtitle { font-size: 13px; color: #6b7280; margin-bottom: 22px; }
-    .muted { color: #6b7280; font-size: 12px; }
+    .muted { color: #6b7280; font-size: 14px; }
 
-    /* ── Layout ── */
+    /* â”€â”€ Layout â”€â”€ */
     .grid-2  { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .grid-3  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
     .grid-4  { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
@@ -81,38 +81,38 @@
     .spacer  { flex: 1; }
     .divider { border: none; border-top: 1px solid #2e3244; margin: 20px 0; }
 
-    /* ── Card ── */
+    /* â”€â”€ Card â”€â”€ */
     .card { background: #1a1d27; border: 1px solid #2e3244; border-radius: 8px; padding: 14px 18px; }
     .card-header { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #2e3244; }
 
-    /* ── Pills ── */
+    /* â”€â”€ Pills â”€â”€ */
     .pill { display: inline-block; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; }
     .pill-active  { background: #1e3a5f; color: #5b7cf6; }
     .pill-high    { background: #3b1d1d; color: #f87171; }
     .pill-med     { background: #2a2200; color: #fbbf24; }
     .pill-sm      { padding: 1px 8px; font-size: 10px; }
 
-    /* ── Stats ── */
+    /* â”€â”€ Stats â”€â”€ */
     .stat-value { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; }
-    .stat-label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; }
+    .stat-label { font-size: 14px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; }
     .stat-value.green  { color: #4ade80; }
     .stat-value.blue   { color: #5b7cf6; }
     .stat-value.amber  { color: #fbbf24; }
     .stat-value.purple { color: #a78bfa; }
     .stat-value.red    { color: #f87171; }
 
-    /* ── Callout ── */
+    /* â”€â”€ Callout â”€â”€ */
     .callout { border-left: 3px solid #5b7cf6; background: #1a1d27; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 13px; color: #c9cdd8; }
     .callout.success { border-color: #4ade80; }
     .callout.warn    { border-color: #fbbf24; }
     .callout.purple  { border-color: #a78bfa; }
-    .callout-title { font-weight: 600; color: #f0f2fb; margin-bottom: 3px; font-size: 13px; }
+    .callout-title { font-weight: 600; color: #f0f2fb; margin-bottom: 3px; font-size: 15px; }
     .callout-title.blue   { color: #5b7cf6; }
     .callout-title.green  { color: #4ade80; }
     .callout-title.purple { color: #a78bfa; }
     .callout-title.warn   { color: #fbbf24; }
 
-    /* ── Cover ── */
+    /* â”€â”€ Cover â”€â”€ */
     .cover-inner    { max-width: 680px; }
     .cover-eyebrow  { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: #5b7cf6; text-transform: uppercase; margin-bottom: 12px; }
     .cover-title    { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: #f0f2fb; margin-bottom: 10px; }
@@ -121,7 +121,7 @@
     .cover-meta-item .label { color: #6b7280; margin-bottom: 2px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
     .cover-meta-item .value { color: #f0f2fb; font-weight: 600; font-size: 14px; }
 
-    /* ── North Star ── */
+    /* â”€â”€ North Star â”€â”€ */
     .ns-statement { font-size: 26px; font-weight: 800; color: #f0f2fb; line-height: 1.25; letter-spacing: -0.5px; max-width: 800px; margin-bottom: 20px; }
     .ns-statement em { color: #5b7cf6; font-style: normal; }
     .ns-stages { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; width: 100%; margin-bottom: 20px; }
@@ -136,7 +136,7 @@
     .ns-title { font-size: 20px; font-weight: 700; color: #f0f2fb; margin-bottom: 10px; }
     .ns-body  { font-size: 17px; color: #9ca3af; line-height: 1.65; }
 
-    /* ── Loop table ── */
+    /* â”€â”€ Loop table â”€â”€ */
     .loop-wrap { border: 1px solid #2e3244; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
     .loop-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
     .loop-table th { background: #1a1d27; color: #9ca3af; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 10px 14px; border-bottom: 2px solid #2e3244; text-align: left; }
@@ -147,7 +147,7 @@
     .loop-badge.inprogress { background: #0d1a2a; color: #5b7cf6; border: 1px solid #1e3a5f; }
     .loop-status { text-align: center; vertical-align: middle; }
 
-    /* ── Pillars ── */
+    /* â”€â”€ Pillars â”€â”€ */
     .pillar { background: #1a1d27; border: 1px solid #2e3244; border-radius: 10px; padding: 20px 18px; display: flex; flex-direction: column; gap: 10px; }
     .pillar-icon   { font-size: 26px; }
     .pillar-number { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #5b7cf6; }
@@ -155,20 +155,20 @@
     .pillar-body   { font-size: 13px; color: #9ca3af; line-height: 1.6; }
     .pillar-proof  { font-size: 12px; color: #4ade80; font-weight: 600; }
 
-    /* ── Program cards ── */
+    /* â”€â”€ Program cards â”€â”€ */
     .prog-card { background: #1a1d27; border: 1px solid #2e3244; border-radius: 8px; padding: 16px 18px; }
     .prog-tag  { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
     .prog-title { font-size: 15px; font-weight: 700; color: #f0f2fb; margin-bottom: 8px; }
     .prog-body  { font-size: 13px; color: #c9cdd8; line-height: 1.6; margin-bottom: 8px; }
     .prog-impact { font-size: 12px; font-style: italic; }
 
-    /* ── Evidence bullets ── */
+    /* â”€â”€ Evidence bullets â”€â”€ */
     .ev-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .ev-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #c9cdd8; }
     .ev-list li .ev-check { color: #4ade80; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
     .ev-list li .ev-cap { color: #6b7280; font-size: 12px; min-width: 130px; flex-shrink: 0; margin-top: 2px; }
 
-    /* ── Role before/after ── */
+    /* â”€â”€ Role before/after â”€â”€ */
     .role-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
     .role-col  { display: flex; flex-direction: column; gap: 8px; }
     .role-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border-radius: 6px; }
@@ -177,13 +177,13 @@
     .role-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
     .role-text { font-size: 13px; color: #c9cdd8; }
 
-    /* ── Lessons ── */
+    /* â”€â”€ Lessons â”€â”€ */
     .lesson { background: #1a1d27; border: 1px solid #2e3244; border-radius: 8px; padding: 16px 20px; }
     .lesson-num  { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5b7cf6; margin-bottom: 4px; }
     .lesson-head { font-size: 15px; font-weight: 700; color: #f0f2fb; margin-bottom: 8px; }
     .lesson-body { font-size: 13px; color: #c9cdd8; line-height: 1.6; }
 
-    /* ── Q2 list ── */
+    /* â”€â”€ Q2 list â”€â”€ */
     .q2-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .q2-list li { display: flex; align-items: baseline; gap: 12px; padding: 13px 16px; border-radius: 8px; background: #1a1d27; border: 1px solid #2e3244; font-size: 14px; color: #c9cdd8; }
     .q2-list li strong { color: #f0f2fb; }
@@ -191,7 +191,7 @@
     .q2-pill.high   { background: #3b1d1d; color: #f87171; }
     .q2-pill.medium { background: #2a2200; color: #fbbf24; }
 
-    /* ── Ask ── */
+    /* â”€â”€ Ask â”€â”€ */
     #slide-11 h1 { font-size: 52px; font-weight: 800; letter-spacing: -2px; color: #f0f2fb; }
 
     @media print {
@@ -216,7 +216,7 @@
 
 <div id="deck">
 
-<!-- ═══════════════════ Slide 1: Cover ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 1: Cover â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide active" id="slide-1">
   <div class="cover-inner">
     <div class="cover-eyebrow">Idira &middot; Technical Writing Group</div>
@@ -232,7 +232,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 2: North Star ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 2: North Star â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-2">
   <div class="ns-statement" style="margin-bottom:14px;">
     From a team that <em>produces</em> documentation<br>to a system that <em>governs</em> it.
@@ -260,7 +260,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 3: How We Measure Success ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 3: How We Measure Success â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-3" style="justify-content:center;">
   <h1 style="margin-bottom:6px;">How We Measure Success</h1>
   <p class="subtitle" style="margin-bottom:28px;">Efficiency, speed, and quality &mdash; measured against real baselines.</p>
@@ -272,23 +272,23 @@
       <div class="stat-label" style="margin-bottom:12px;color:#5b7cf6;">AI-Assisted Output</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;">
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Started</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Started</div>
           <div class="stat-value" style="font-size:22px;color:#4b5563;">0%</div>
-          <div style="font-size:10px;color:#4b5563;margin-top:1px;">12 months ago</div>
+          <div style="font-size:12px;color:#4b5563;margin-top:2px;">12 months ago</div>
         </div>
         <div style="color:#3d4158;font-size:16px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Now</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Now</div>
           <div class="stat-value blue" style="font-size:28px;">97%</div>
         </div>
         <div style="color:#3d4158;font-size:16px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Target</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Target</div>
           <div class="stat-value" style="font-size:22px;color:#a5b4fc;">100%</div>
         </div>
       </div>
       <div style="text-align:center;margin-top:8px;">
-        <span style="background:#1e2a5e;color:#818cf8;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;">&#8593; +97 pts in 12 months (0% &rarr; 97%)</span>
+        <span style="background:#1e2a5e;color:#818cf8;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;">&#8593; +97 pts in 12 months (0% &rarr; 97%)</span>
       </div>
       <div class="muted" style="text-align:center;margin-top:6px;">Every deliverable AI-assisted by Q2</div>
     </div>
@@ -298,23 +298,23 @@
       <div class="stat-label" style="margin-bottom:12px;color:#4ade80;">Cycle Time</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;">
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Started</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Started</div>
           <div class="stat-value" style="font-size:22px;color:#4b5563;">19 days</div>
-          <div style="font-size:10px;color:#4b5563;margin-top:1px;">Q4 FY2026</div>
+          <div style="font-size:12px;color:#4b5563;margin-top:2px;">Q4 FY2026</div>
         </div>
         <div style="color:#3d4158;font-size:16px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Now</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Now</div>
           <div class="stat-value green" style="font-size:28px;">6 days</div>
         </div>
         <div style="color:#3d4158;font-size:16px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Target</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Target</div>
           <div class="stat-value" style="font-size:22px;color:#86efac;">&le;3 days</div>
         </div>
       </div>
       <div style="text-align:center;margin-top:8px;">
-        <span style="background:#052e16;color:#4ade80;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;">&#8595; 68% faster (19 days &rarr; 6 days)</span>
+        <span style="background:#052e16;color:#4ade80;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;">&#8595; 68% faster (19 days &rarr; 6 days)</span>
       </div>
       <div class="muted" style="text-align:center;margin-top:6px;">Target: same-day publish by end of FY2027</div>
     </div>
@@ -324,17 +324,17 @@
       <div class="stat-label" style="margin-bottom:12px;color:#fbbf24;">Quality Score</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;">
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Now</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Now</div>
           <div class="stat-value amber" style="font-size:22px;">24 pages</div>
         </div>
         <div style="color:#3d4158;font-size:18px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Target</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Target</div>
           <div class="stat-value" style="font-size:22px;color:#fde68a;">All high-traffic</div>
         </div>
       </div>
       <div style="text-align:center;margin-top:8px;">
-        <span style="background:#2a1f00;color:#fbbf24;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;">&#8593; 8&times; more pages</span>
+        <span style="background:#2a1f00;color:#fbbf24;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;">&#8593; 8&times; more pages</span>
       </div>
       <div class="muted" style="text-align:center;margin-top:6px;">Pilot scored &amp; validated &mdash; scaling Q2</div>
     </div>
@@ -344,17 +344,17 @@
       <div class="stat-label" style="margin-bottom:12px;color:#a78bfa;">Team Efficiency</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;">
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Now</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Now</div>
           <div class="stat-value purple" style="font-size:28px;">19 FTE</div>
         </div>
         <div style="color:#3d4158;font-size:18px;">&#8594;</div>
         <div style="text-align:center;">
-          <div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px;">Q2</div>
+          <div style="font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Q2</div>
           <div class="stat-value" style="font-size:28px;color:#c4b5fd;">14 FTE</div>
         </div>
       </div>
       <div style="text-align:center;margin-top:8px;">
-        <span style="background:#1e1a3c;color:#a78bfa;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;">&#8595; 26% leaner team</span>
+        <span style="background:#1e1a3c;color:#a78bfa;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.3px;">&#8595; 26% leaner team</span>
       </div>
       <div class="muted" style="text-align:center;margin-top:6px;">Productivity gains first &mdash; fewer people as the result, not the cause.</div>
     </div>
@@ -362,13 +362,13 @@
   </div>
 
   <div class="callout" style="border-color:#5b7cf6;background:linear-gradient(135deg,#1a1d3c 0%,#0f1117 100%);text-align:center;padding:14px 24px;">
-    <div class="callout-title blue" style="font-size:13px;font-weight:600;">
+    <div class="callout-title blue" style="font-size:15px;font-weight:600;">
       Success = cycle time &le;3 days &nbsp;&middot;&nbsp; 100% AI-assisted &nbsp;&middot;&nbsp; all high-traffic pages green &nbsp;&middot;&nbsp; same delivery with 5 fewer FTEs
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 4: Closing the Loop ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 4: Closing the Loop â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-4">
   <h1>Key Achievements of Q1 FY2027</h1>
   <p class="subtitle">The highlights from Q1 FY2027.</p>
@@ -403,7 +403,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 5: Partnerships ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 5: Partnerships â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-5" style="justify-content:center;align-items:center;">
   <h1 style="margin:0 0 6px;">Demo: AI Skills in Action</h1>
   <p class="subtitle" style="margin-bottom:20px;">Reusable Cursor agent skills automating the TW workflow.</p>
@@ -419,7 +419,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 10: Q2 FY2027 ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 10: Q2 FY2027 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-6">
   <h1>Getting There &mdash; Together</h1>
   <p class="subtitle">Four cross-organizational AI programs where TW is acting as a platform, not just a production team.</p>
@@ -469,7 +469,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 7: Doc Health Spotlight ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 7: Doc Health Spotlight â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-7">
   <h1 style="margin-bottom:4px;">Q2 FY2027 &mdash; Roadmap</h1>
   <p class="subtitle" style="margin-bottom:20px;">Three pillars. Q2 FY2027.</p>
@@ -558,7 +558,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════ Slide 11: The Ask ═══════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• Slide 11: The Ask â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="slide" id="slide-8">
   <h1>Q&amp;A</h1>
 </section>
@@ -610,7 +610,7 @@
     if (e.key === 't' || e.key === 'T') toggleTimer();
   });
 
-  // ── Timer ───────────────────────────────────────────────────────────────────
+  // â”€â”€ Timer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   let timerStart = null, timerInterval = null, timerRunning = false, timerElapsed = 0;
   function toggleTimer() {
     const el = document.getElementById('timer');
@@ -648,3 +648,4 @@
 </script>
 </body>
 </html>
+
